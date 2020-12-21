@@ -16,3 +16,15 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+Artisan::command('make:admin', function () {
+    \App\Admin::create([
+        'name'  => 'Admin',
+        'email' => 'admin@3now.com',
+        'password' => \Hash::make('1234')
+    ]);
+})->describe('Create Admin');
+
+Artisan::command('make:data', function () {
+    \Artisan::call('db:seed');
+})->describe('Add fake data to database');

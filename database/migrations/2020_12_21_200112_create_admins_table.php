@@ -18,8 +18,8 @@ class CreateAdminsTable extends Migration
 		    $table->string('name', 255);
 		    $table->string('email', 255);
 		    $table->string('password', 255);
-		    $table->string('picture', 255)->default(null);
-		    $table->string('remember_token', 100)->default(null);
+		    $table->string('picture', 255)->nullable();
+		    $table->string('remember_token', 100)->nullable();
             $table->timestamps();
         });
     }

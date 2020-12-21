@@ -62,7 +62,8 @@ class CreateUserRequestsTable extends Migration
 		    $table->string('vorname', 255)->default(null);
 		    $table->string('nachname', 255)->default(null);
 		    $table->string('emailadress', 255)->default(null);
-		    $table->string('tips', 255)->default(null);
+			$table->string('tips', 255)->default(null);
+			$table->string('subtotal', 255)->nullable();
             $table->timestamps();
 		    $table->time('deleted_at')->nullable()->default(null);
         });
