@@ -1,0 +1,191 @@
+.center {
+margin: auto;
+width: 60%;
+font-family: 'Tajawal';
+}
+
+.nav_header{
+background: #3EBAED;
+height: auto;
+border-radius: 0px 0px 170px 0px;
+padding: 40px 60px;
+color: white;
+margin-bottom: 50px;
+}
+
+.logo {
+margin-top: 20px
+}
+
+.line{
+	border-color: #F7F7F7;
+}
+
+.tableInfo{
+	width: 90%;
+}
+
+.price{
+	text-align: right;
+}
+
+.pick{
+	text-align: left;
+	font-weight: 900;
+}
+
+p.para {
+    background: #F7F7F7;
+    padding: 20px 21.28px;
+    margin-bottom: 21.28px;
+    border-radius: 10px;
+    color: #888888;
+}
+
+
+.container{
+	margin: auto;
+    width: 65%;
+}
+
+.tableInfo {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 21.28px;
+}
+
+a.totalPrice {
+    background: #3EBAED;
+    text-decoration: none;
+    color: white;
+    padding: 15px 50px;
+    border-radius: 10px;
+    font-size: 40px;
+}
+
+table.tableInfo.tablePrice {
+    margin-bottom: 21.28px;
+    margin-top: 21.28px;
+}
+
+i.fa.fa-briefcase {
+    margin-left: 15px;
+}
+
+.totalPriced {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.important h3 {
+    color: red;
+}
+
+table.tableInfo.payPal {
+    margin-bottom: 40px;
+}
+
+i.fa {
+    margin-right: 5px;
+}
+i.fas {
+    margin-right: 5px;
+}
+
+.siteInfo {
+	margin-top: 15px;
+}
+.siteInfo a {
+    text-decoration: none;
+    color: #6589BA;
+}
+
+.about {
+	text-align: center;
+	margin: 50px;
+}
+.about a{
+	color: #888888;
+	margin: 20px
+}
+
+a.tele {
+    color: #888888;
+}
+
+a.tele {
+    color: #888888;
+}
+
+a.adresse {
+    color: #6589BA;
+}
+
+.tablePrice td {
+    font-weight: 600;
+}
+
+.finghadi {
+    display: -webkit-box;
+}
+img.imgFinghadi {
+    width: 6px;
+    margin-top: -40px;
+}
+
+.CarInfo {
+    margin-bottom: 21.28px;
+}
+
+@media (max-width: 700px) and (min-width: 0px) {
+
+body.center {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 90%;
+}
+
+table.tableInfo {
+    margin-left: 10px;
+    width: 90% !important;
+}
+
+.nav_header {
+    text-align: center;
+}
+}
+
+@media (max-width: 1200px) and (min-width: 700px) {
+
+body.center {
+    width: 75%;
+    overflow-x: hidden;
+}
+
+table.tableInfo {
+    width: 90% !important;
+}
+
+.nav_header {
+    text-align: center;
+}
+}
+
+@media (max-width: 1500px) and (min-width: 1200px) {
+
+body.center {
+    width: 75%;
+    overflow-x: hidden;
+}
+
+table.tableInfo {
+    width: 90% !important;
+}
+
+.nav_header {
+    text-align: center;
+}
+}
