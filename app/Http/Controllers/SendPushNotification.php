@@ -100,7 +100,6 @@ class SendPushNotification extends Controller
         return $this->sendPushToUser($userID,$msg,'chat',$request_id,$username);
     }
     public function userNotify($userID,$title,$msg,$msg_type,$notification_images){      //push notification to user
-        //dd($notification_images);
         $notifications  = PushNotification::where('to_user',$userID)->orderBy('id','desc')->first();
         $img="";
         $image = "http://quickrideja.com/public/user/profile/".$notification_images;
@@ -252,7 +251,6 @@ class SendPushNotification extends Controller
      */
     public function sendPushToUser($user_id, $push_message,$msg_type = "",$request_id="",$username="",$admin="",$img="")
     {
-    //dd($img);
     	try{
 
             $user = User::findOrFail($user_id);
@@ -260,7 +258,6 @@ class SendPushNotification extends Controller
  
                 if(!empty($user->ios_token)){
                     (new \App\Http\Controllers\Controller())->send_notification($user->ios_token,'3now chat',$push_message);
-                   // shell_exec('curl -X POST --header "Authorization: key=AAAAxJsH8XU:APA91bEX41lZ2nvkXFLqd__il5MOsvyzAZbAsZgpgWMfXlE2YD6ai1OpKvGBLwyVBzose81XV9hDaOOBpYbBrxzycQcqOScVQXo2KCst8W0xfvYVgt6tpf-UY_zGxDY8hp5c3b7kwKfD" --header "Content-Type: application/json" https://fcm.googleapis.com/fcm/send -d "{\"to\":\"'.$user->ios_token.'\",\"priority\":\"high\",\"data\":{\"msg_type\":\"'.$msg_type.'\",\"request_id\":\"'.$request_id.'\",\"image_url\":\"'.$img.'\",\"user_name\":\"'.$username.'\",\"msg\":\"'.$push_message.'\"},\"notification\":{\"body\": \"'.stripslashes($push_message).'\",\"title\":\"'.$msg_type.'\",\"image\":\"'.$img.'\"}}"');
                     return true;
                 }
           
@@ -268,27 +265,9 @@ class SendPushNotification extends Controller
          
                 if(!empty($user->device_token)){
                     (new \App\Http\Controllers\Controller())->send_notification($user->device_token,'3now chat',$push_message);
-                    //shell_exec('curl -X POST --header "Authorization: key=AAAAxJsH8XU:APA91bEX41lZ2nvkXFLqd__il5MOsvyzAZbAsZgpgWMfXlE2YD6ai1OpKvGBLwyVBzose81XV9hDaOOBpYbBrxzycQcqOScVQXo2KCst8W0xfvYVgt6tpf-UY_zGxDY8hp5c3b7kwKfD" --header "Content-Type: application/json" https://fcm.googleapis.com/fcm/send -d "{\"to\":\"'.$user->device_token.'\",\"priority\":\"high\",\"data\":{\"msg_type\":\"'.$msg_type.'\",\"request_id\":\"'.$request_id.'\",\"image_url\":\"'.$img.'\",\"user_name\":\"'.$username.'\",\"msg\":\"'.$push_message.'\"},\"notification\":{\"body\": \"'.stripslashes($push_message).'\",\"title\":\"'.$msg_type.'\",\"image\":\"'.$img.'\"}}"');
                     return true;
                 }
            
-
-
-
-
-            /*
-            if($user->device_token != ""){
-    	    	if($user->device_type == 'ios'){
-    	    		return \PushNotification::app('IOSUser')
-    		            ->to($user->device_token)
-    		            ->send($push_message);
-
-    	    	}elseif($user->device_type == 'android'){
-
-					shell_exec('curl -X POST --header "Authorization: key=AAAAxJsH8XU:APA91bEX41lZ2nvkXFLqd__il5MOsvyzAZbAsZgpgWMfXlE2YD6ai1OpKvGBLwyVBzose81XV9hDaOOBpYbBrxzycQcqOScVQXo2KCst8W0xfvYVgt6tpf-UY_zGxDY8hp5c3b7kwKfD" --header "Content-Type: application/json" https://fcm.googleapis.com/fcm/send -d "{\"to\":\"'.$user->device_token.'\",\"priority\":\"high\",\"data\":{\"msg_type\":\"'.$msg_type.'\",\"request_id\":\"'.$request_id.'\",\"image_url\":\"'.$img.'\",\"user_name\":\"'.$username.'\",\"msg\":\"'.$push_message.'\"},\"notification\":{\"body\": \"'.stripslashes($push_message).'\",\"title\":\"'.$msg_type.'\",\"image\":\"'.$img.'\"}}"');
-    	    	}
-            }
-            */
 
     	}   catch(Exception $e){
     		return $e;
@@ -305,7 +284,6 @@ class SendPushNotification extends Controller
      */
     public function sendPushToProvider($provider_id, $push_message,$msg_type = "",$request_id="",$username="",$admin="",$img="")
     {
-        //dd($img);
     	try{
             $provider = ProviderDevice::where('provider_id',$provider_id)->first();
             if($provider->token != ""){
@@ -331,8 +309,6 @@ class SendPushNotification extends Controller
         $msg_type = "offline";
         $request_id=1;
         $username="upendra";
-        //$admin="";
-        //$img="";
         $data = ProviderService::where('status','offline')->get();
         foreach($data as $p)
         {

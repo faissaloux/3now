@@ -177,8 +177,6 @@ class HomeController extends Controller
     {
         $promocodes = $this->UserAPI->promocodes();
 		
-		//dd( $promocodes );
-		
 		
         return view('user.account.promotions', compact('promocodes'));
     }

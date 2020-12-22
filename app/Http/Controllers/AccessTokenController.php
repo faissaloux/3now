@@ -16,7 +16,6 @@ class AccessTokenController extends \Laravel\Passport\Http\Controllers\AccessTok
 {
     public function issueToken(ServerRequestInterface $request)
     {
-        //dd('dd');
        
         try {
             //get username (default is :email)

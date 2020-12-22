@@ -141,7 +141,6 @@ class PaymentController extends Controller
         }
         if($UserRequest->payment_mode == 'PAYPAL') {
 
-                  //dd('hii');
              Session::put('request_id',$request->request_id);
 
          	 $RequestPayment = UserRequestPayment::where('request_id',$request->request_id)->first(); 

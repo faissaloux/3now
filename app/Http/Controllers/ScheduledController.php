@@ -1140,9 +1140,6 @@ public function send_schedule_payment(Request $request){
                             if($request->has('schedule_date') && $request->has('schedule_time')){
                                 $UserRequest->schedule_at = date("Y-m-d H:i:s",strtotime("$request->schedule_date $request->schedule_time"));
                             }
-                            //$checkrequest = UserRequests::where('status','')->where('user_id', Auth::user()->id)->get();
-
-                            //dd($checkrequest);
                         
                             $UserRequest->save();
                             $data = array(
@@ -1153,14 +1150,6 @@ public function send_schedule_payment(Request $request){
                                 'drivername'    => $Providers[0]->first_name,
                                 'drivermobile'  => $Providers[0]->mobile
                             );
-                
-                            /*
-                             //Send New Request Email to Admin
-                            Mail::send('emails.new_request_notification', [ 'data' => $data ] , function($message) use ($data) {
-                                $message->to( config('mail.admin.address') )->subject('New Request Accepted By Driver | Wedrive ');
-                                $message->from( config('mail.from.address' ) , config('mail.from.name') );
-                            });
-                            */
 
                 
                             // update payment mode
@@ -2843,7 +2832,6 @@ public function send_schedule_payment(Request $request){
 	     $data->user_name = Auth::user()->first_name;
 	     $data->provider_name = Provider::where('id',$data->provider_id)->value('first_name');
 	     $data->provider_picture = Provider::where('id',$data->provider_id)->value('avatar');
-	     //dd($data);
 	     return $data;
 	 }
 
@@ -3557,9 +3545,6 @@ public function send_schedule_payment(Request $request){
                    
                }
             endforeach;
-            
-            //$Data = json_encode(array_values($Locations));
-            //dd(json_decode($Data));
         
             
             if ($find==1)
@@ -3632,11 +3617,7 @@ public function send_schedule_payment(Request $request){
 	public function notification(Request $request)
     {
         $id = Auth::user()->id;
-        /*$notifications = PushNotification::where('type',1)->whereRaw("find_in_set($id,to_user)")->get();
-            
-                return response()->json(['Data' =>$notifications]);*/
         try {
-            //dd(date('Y-m-d'));
             $notifications = PushNotification::where('type',1)->whereRaw("find_in_set($id,to_user)")->whereDate('expiration_date', '>=', date('Y-m-d'))->orderBy('id','desc')->get();
             return response()->json(['Data' =>$notifications]);
             
