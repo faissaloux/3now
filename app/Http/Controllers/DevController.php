@@ -10,11 +10,6 @@ class DevController extends Controller
         $coupon_helper = new \App\Helper\CouponHelper();
         $result = $coupon_helper->check('$request->promo_cod')->request(5997)->use();
         print_r($result);
-
-      // if(isset($request->promo_code) and !empty($request->promo_code)){
-                    //     $coupon_helper = new \App\Helper\CouponHelper();
-                    //     $result = $coupon_helper->check($request->promo_code)->request(5997)->use();
-                    // }
     }
 
     public function deleteLog(){
@@ -88,26 +83,7 @@ class DevController extends Controller
 
     public function checkGoogleApi(){
         $json = curl('https://maps.googleapis.com/maps/api/geocode/json?latlng=51.21507920,6.84209850&key=AIzaSyAaCcYWO2ClnRd-ZSlDnW17Jh2jnBatCmg');
-
-        /*
-        $details = json_decode($json, TRUE);
-
-
-            $meter        = $details['routes'][0]['legs'][0]['distance']['value'] ?? 0;
-            $meter_txt      = $details['routes'][0]['legs'][0]['distance']['text'] ?? 0;
-            $kilometer      = round($meter/1000,1);
-            $kilometer_txt  = "$kilometer km" ;
-            $seconds    = $details['routes'][0]['legs'][0]['duration']['value'] ?? 0;
-            $minutes    = round($seconds/60,1);
-            $minutes_txt    = $minutes . ' mins';
-            $route_key    = $details['routes'][0]['overview_polyline']['points'];
-
-        */
-
-
         echo $json;
-
-        // $json = curl($this->googleApi()); 
     }
 
     public function googleKeys(){

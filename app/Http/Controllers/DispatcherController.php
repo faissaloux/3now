@@ -34,14 +34,7 @@ class DispatcherController extends Controller
      */
     public function __construct(UserApiController $UserAPI)
     {
-        //$this->middleware('auth');
         $this->UserAPI = $UserAPI;
-		
-		/*
-		$ip 	=   \Request::getClientIp(true);
-		$url	=	"http://www.geoplugin.net/json.gp?ip={$ip}";
-		$this->ip_details =  $this->getDataByCurl($url);
-		*/
 	}
 
 
@@ -124,8 +117,6 @@ class DispatcherController extends Controller
 			
 			return $this->assign( $request );
 		}
-		
-    
 	}
 	
 	public function assignCompany(Request $request) {

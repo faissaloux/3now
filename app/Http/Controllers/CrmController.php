@@ -37,11 +37,9 @@ class CrmController extends Controller
      */
     public function __construct(UserApiController $UserAPI)
     {
-        //$this->middleware('auth');
         $this->UserAPI = $UserAPI;
 		
 	}
-
 
     /**
      * Create a new controller instance.
@@ -51,9 +49,6 @@ class CrmController extends Controller
     
 
     private static function last7DaysTrip(){
-
-    //Carbon::parse($date->created_at)->format('1')
-
     $days_arr =array();
 
     $last7days_rides= UserRequests::whereDate('created_at','>=', Carbon::now()->subDays(7)) ->groupBy('created_at')->select('created_at', DB::raw('count(*) as total'))->get();
@@ -63,11 +58,9 @@ class CrmController extends Controller
 
      foreach ($last7days_rides as $key => $value) { 
           
-          $day = Carbon::now()->format( 'F' );
-          
-         // $value->format('l'); total
-         $day_name= Carbon::parse($value->created_at)->format('D'); 
-         $days_arr[$day_name]= array($day_name, (float) $value->total);
+        $day = Carbon::now()->format( 'F' );        
+        $day_name= Carbon::parse($value->created_at)->format('D'); 
+        $days_arr[$day_name]= array($day_name, (float) $value->total);
      }
       
   }
@@ -91,15 +84,12 @@ class CrmController extends Controller
         }
 
      return $days; 
-    //print_r($days);die;
 
 }
 
 
 
 private static function last7DaysTripRe(){
-
-    //Carbon::parse($date->created_at)->format('1')
 
     $days_arr =array();
 
@@ -113,8 +103,6 @@ private static function last7DaysTripRe(){
      foreach ($last7days_rides as $key => $value) { 
           
           $day = Carbon::now()->format( 'F' );
-
-         // $value->format('l');
          $day_name= Carbon::parse($value->created_at)->format('D'); 
 
            
@@ -150,19 +138,12 @@ private static function last7DaysTripRe(){
         }
 
      return $days; 
-    //print_r($days);die;
-
 
 }
 
 
-
-
-
-
 	public function dashboard() {
 
-	//	dd('kdkd');
         try{
             $rides = UserRequests::with('user','provider')->orderBy('id','desc')->get();
             $cancel_rides = UserRequests::where('status','CANCELLED')->get();
@@ -345,14 +326,5 @@ private static function last7DaysTripRe(){
         catch (Exception $e) {
             return back()->with('flash_error', 'User Not Found');
         }
-    }
-    public function transfer($id){
-        
-        $data = Complaint::where('id',$id)->first();
-        $data->status = $request->status;
-        $data->transfer = $request->transfer;
-        $data->reply = $request->reply;
-        $data->save();
-        return redirect()->back()->with('flash_success','Ticket Updated');
     }
 }
