@@ -183,7 +183,7 @@ class DocumentController extends Controller
 		 
 //         } catch (Exception $e) {
 				
-//             return response()->json(['error' => trans('api.something_went_wrong')], 500);
+//             return something_went_wrong();
  
 //         }
 		
@@ -233,7 +233,7 @@ class DocumentController extends Controller
 		 
         } catch (Exception $e) {
 				
-            return response()->json(['error' => trans('api.something_went_wrong')], 500);
+            return something_went_wrong();
  
         }
 		
@@ -255,7 +255,7 @@ class DocumentController extends Controller
 			
 		} catch(Exception $e) {
 			
-			return response()->json(['error' => trans('api.something_went_wrong')], 500);
+			return something_went_wrong();
 		}
 		
 	}
@@ -279,7 +279,7 @@ class DocumentController extends Controller
 			
 // 		} catch(Exception $e) {
 			
-// 			return response()->json(['error' => trans('api.something_went_wrong')], 500);
+// 			return something_went_wrong();
 // 		}
 		
 // 	}
@@ -311,7 +311,7 @@ class DocumentController extends Controller
             
         }   catch(Exception $e) {
             
-            return response()->json(['error' => trans('api.something_went_wrong')], 500);
+            return something_went_wrong();
         }
         
     }

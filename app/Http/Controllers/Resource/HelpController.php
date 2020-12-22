@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Resource;
 use App\AdminHelps;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 
 class HelpController extends Controller
 {
@@ -16,7 +15,6 @@ class HelpController extends Controller
                 'description' => 'required',
             ]);
 
-        $description = $request->description;
        
         $AdminHelps = new AdminHelps;
 
@@ -35,7 +33,7 @@ class HelpController extends Controller
         }
 
         catch (Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong')]);
+            return something_went_wrong();
         } 
     }
 
@@ -51,7 +49,7 @@ class HelpController extends Controller
         }
 
         catch (Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong')]);
+            return something_went_wrong();
         } 
     }
 
@@ -59,7 +57,6 @@ class HelpController extends Controller
     {
         $helps = $this->helpsget();
         
-        //$faqs_dtl = $this->faqsget_detail($request);
         return view('admin.help',compact('helps'));
     }
 

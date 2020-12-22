@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Notifications\DispatcherResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 

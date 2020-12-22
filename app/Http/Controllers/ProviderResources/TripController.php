@@ -850,7 +850,7 @@ class TripController extends Controller
         }
 
         catch (Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong')]);
+            return something_went_wrong();
         }
     }
 
@@ -952,7 +952,7 @@ class TripController extends Controller
             }
 
         } catch (Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong')]);
+            return something_went_wrong();
         }
 
     }
@@ -977,7 +977,7 @@ class TripController extends Controller
 
         }catch (Exception $e) {
             if($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong')]);
+                return something_went_wrong();
             }
         }
     }

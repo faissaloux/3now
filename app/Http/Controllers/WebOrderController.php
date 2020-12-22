@@ -346,7 +346,7 @@ class WebOrderController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ]);
+                return something_went_wrong();
             }
         }
     }
@@ -362,7 +362,7 @@ class WebOrderController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ]);
+                return something_went_wrong();
             }
         }
     }
@@ -385,7 +385,7 @@ class WebOrderController extends Controller {
             return response()->json($prices);
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     public function saveOrder($request) {

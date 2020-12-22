@@ -76,7 +76,7 @@ class CommonController extends Controller {
             return response()->json($json);
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     public function complaint_form(Request $request) {
@@ -93,7 +93,7 @@ class CommonController extends Controller {
             return response()->json($json);
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     public function sendMessage(Request $request) {
@@ -118,7 +118,7 @@ class CommonController extends Controller {
             return response()->json($json);
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     public function lostItemForm(Request $request) {
@@ -135,7 +135,7 @@ class CommonController extends Controller {
             return response()->json($json);
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     public function blogs(Request $request) {

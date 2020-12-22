@@ -35,7 +35,7 @@ class TermsConditionController extends Controller
         }
 
         catch (Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong')]);
+            return something_went_wrong();
         } 
     }
 
@@ -51,7 +51,7 @@ class TermsConditionController extends Controller
         }
 
         catch (Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong')]);
+            return something_went_wrong();
         } 
     }
 

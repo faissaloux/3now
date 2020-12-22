@@ -182,7 +182,7 @@ class TokenController extends Controller
             ProviderService::where('provider_id',$request->id)->update(['status' => 'offline']);
             return response()->json(['message' => trans('api.logout_success')]);
         } catch (Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong')], 500);
+            return something_went_wrong();
         }
     }
 
@@ -216,7 +216,7 @@ class TokenController extends Controller
             ]);
 
         }catch(Exception $e){
-                return response()->json(['error' => trans('api.something_went_wrong')], 500);
+                return something_went_wrong();
         }
     }
 
@@ -246,7 +246,7 @@ class TokenController extends Controller
 
         }catch (Exception $e) {
             if($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong')]);
+                return something_went_wrong();
             }
         }
     }
@@ -346,7 +346,7 @@ class TokenController extends Controller
 				
             }  
         } catch (Exception $e) {
-            return response()->json(['status'=>false,'message' => trans('api.something_went_wrong')]);
+            return something_went_wrong();
         }
     }
 
@@ -425,7 +425,7 @@ class TokenController extends Controller
                 return response()->json(['status'=>false,'message' => "Invalid credentials!"]);
             }  
         } catch (Exception $e) {
-            return response()->json(['status'=>false,'message' => trans('api.something_went_wrong')]);
+            return something_went_wrong();
         }
     }
 

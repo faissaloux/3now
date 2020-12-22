@@ -32,7 +32,8 @@
         },
         "files": [
             "app/Helper/ControllerHelper.php",
-            "app/Helper/ViewHelper.php"
+            "app/Helper/ViewHelper.php",
+            "app/helpers.php"
         ]
     },
     "autoload-dev": {

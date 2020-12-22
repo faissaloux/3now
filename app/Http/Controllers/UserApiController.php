@@ -178,7 +178,7 @@ class UserApiController extends Controller {
             return $User;
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     /**
@@ -192,7 +192,7 @@ class UserApiController extends Controller {
             return response()->json(['message' => trans('api.logout_success') ]);
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     /**
@@ -266,7 +266,7 @@ class UserApiController extends Controller {
             }
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     public function update_profile(Request $request) {
@@ -770,7 +770,7 @@ class UserApiController extends Controller {
         }
         catch(ModelNotFoundException $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ]);
+                return something_went_wrong();
             } else {
                 return back()->with('flash_error', 'No Request Found!');
             }
@@ -822,7 +822,7 @@ class UserApiController extends Controller {
             return response()->json(['data' => $UserRequests]);
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     /**
@@ -865,7 +865,7 @@ class UserApiController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+                return something_went_wrong();
             } else {
                 return back()->with('flash_error', 'Something went wrong');
             }
@@ -898,7 +898,7 @@ class UserApiController extends Controller {
             return $UserRequests;
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ]);
+            return something_went_wrong();
         }
     }
     /**
@@ -1009,7 +1009,7 @@ class UserApiController extends Controller {
         }
         catch(Exception $e) {
             return $e;
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     public function estimated_fare(Request $request) {
@@ -1132,7 +1132,7 @@ class UserApiController extends Controller {
         }
         catch(Exception $e) {
             return $e;
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     /**
@@ -1154,7 +1154,7 @@ class UserApiController extends Controller {
             return $UserRequests;
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ]);
+            return something_went_wrong();
         }
     }
     /**
@@ -1168,7 +1168,7 @@ class UserApiController extends Controller {
             return PromocodeUsage::Active()->where('user_id', Auth::user()->id)->with('promocode')->get();
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     public function check_expiry() {
@@ -1185,7 +1185,7 @@ class UserApiController extends Controller {
             }
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     /**
@@ -1224,7 +1224,7 @@ class UserApiController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+                return something_went_wrong();
             } else {
                 return back()->with('flash_error', 'Something Went Wrong');
             }
@@ -1251,7 +1251,7 @@ class UserApiController extends Controller {
             return $UserRequests;
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ]);
+            return something_went_wrong();
         }
     }
     /**
@@ -1273,7 +1273,7 @@ class UserApiController extends Controller {
             return $UserRequests;
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ]);
+            return something_went_wrong();
         }
     }
     /**
@@ -1304,7 +1304,7 @@ class UserApiController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+                return something_went_wrong();
             } else {
                 return back()->with('flash_error', 'Something went wrong while sending request. Please try again.');
             }
@@ -1322,7 +1322,7 @@ class UserApiController extends Controller {
             return response()->json(['message' => 'OTP sent to your email!', 'user' => $user]);
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     /**
@@ -1342,7 +1342,7 @@ class UserApiController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ]);
+                return something_went_wrong();
             }
         }
     }
@@ -1359,7 +1359,7 @@ class UserApiController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ]);
+                return something_went_wrong();
             }
         }
     }
@@ -1377,7 +1377,7 @@ class UserApiController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ]);
+                return something_went_wrong();
             }
         }
     }
@@ -1412,7 +1412,7 @@ class UserApiController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+                return something_went_wrong();
             } else {
                 return back()->with('flash_error', 'Something Went Wrong');
             }

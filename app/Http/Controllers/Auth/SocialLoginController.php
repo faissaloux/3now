@@ -181,7 +181,7 @@ class SocialLoginController extends Controller
                 return response()->json(['status'=>false,'message' => "Invalid credentials!"]);
             }  
         } catch (Exception $e) {
-            return response()->json(['status'=>false,'message' => trans('api.something_went_wrong')]);
+            return something_went_wrong();
         }
     }
 
@@ -340,7 +340,7 @@ class SocialLoginController extends Controller
                 return response()->json(['status'=>false,'message' => "Invalid credentials!"]);
             }  
         }   catch (Exception $e) {
-            return response()->json(['status'=>false,'message' => trans('api.something_went_wrong')]);
+            return something_went_wrong();
         }
     }
 

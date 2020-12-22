@@ -4,53 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Chatroom;
 use DB;
-use Log;
 use Auth;
 use Hash;
 use Storage;
 use Setting;
 use Exception;
-use Notification;
-use Mail; 
-use App\Chat;
 use Carbon\Carbon;
 use App\Http\Controllers\SendPushNotification;
-use App\Notifications\ResetPasswordOTP;
 use App\Helpers\Helper;
-use App\PushNotification;
-use App\Card;
-use App\Zones;
-use App\User;
-use App\Provider;
-use App\Settings;
-use App\Promocode;
-use App\ServiceType;
-use App\UserRequests;
-use App\RequestFilter;
-use App\PromocodeUsage;
-use App\ProviderService;
-use App\UserRequestRating;
 use App\Http\Controllers\ProviderResources\TripController;
-use App\UserLocationType;
-use App\UserComplaint;
-use App\FareSetting;
-use App\PeakAndNight;
-use App\UserRequestPayment;
+use App\Models\{Chat,PushNotification,Card,Zones,User,Provider,Promocode,ServiceType,UserRequests,PromocodeUsage,ProviderService,RequestFilter,UserRequestRating,UserLocationType,UserComplaint,FareSetting,PeakAndNight,UserRequestPayment};
 use Stripe\Charge;
 use Stripe\Stripe;
-use Stripe\StripeInvalidRequestError;
 
 class UserApiController extends Controller
 {
-
-
-
-
-
-
-
+    
     public function sendTest()
     {
 
@@ -138,32 +108,7 @@ class UserApiController extends Controller
                         $longitude    = $request->s_longitude;
                         $service_type = $request->service_type;
                         $promo_code   = $request->promo_code;
-                        /*
-                        $Providers    = Provider::with('service')
-                                        ->select(DB::Raw("(6387 * acos( cos( radians('$latitude') ) * cos( radians(latitude) ) * cos( radians(longitude) - radians('$longitude') ) + sin( radians('$latitude') ) * sin( radians(latitude) ) ) ) AS distance"),'id')
-                                        ->where('status', 'approved')
-                                        ->whereRaw("(6387 * acos( cos( radians('$latitude') ) * cos( radians(latitude) ) * cos( radians(longitude) - radians('$longitude') ) + sin( radians('$latitude') ) * sin( radians(latitude) ) ) ) <= $distance")
-                                        ->whereHas('service', function($query) use ($service_type){
-                                                    $query->where('status','active');
-                                                    $query->where('service_type_id',$service_type);
-                                                })
-                                        ->orderBy('distance','asc')
-                                        ->get();
-
-
-
-                        //List Providers who are currently busy and add them to the filter list.
-                        /*
-                        if(count($Providers) == 0) {
-                            if($request->ajax()) {
-
-                                // Push Notification to User
-                                return response()->json(['message' => trans('api.ride.no_providers_found')]); 
-                            }else{
-                                return back()->with('flash_success', 'No Providers Found! Please try again.');
-                            }
-                        }
-                    */
+                        
 
                         $Providers[0] = Provider::find(139);
 
@@ -296,7 +241,7 @@ class UserApiController extends Controller
 								
 								return $e->getMessage();
 							    
-                                return response()->json(['error' => trans('api.something_went_wrong')], 500);
+                                return something_went_wrong();
                             }else{
                                 return back()->with('flash_error', 'Something went wrong while sending request. Please try again.');
                             }
@@ -611,7 +556,7 @@ class UserApiController extends Controller
 			return response()->json(['msg'=>'success done.']);
   
 }   catch (Exception $e) {
-		return response()->json(['error' => trans('api.something_went_wrong')], 500);
+		return something_went_wrong();
 }
 
     }
@@ -648,7 +593,7 @@ class UserApiController extends Controller
 
             return $User;
         }   catch (Exception $e) {
-                return response()->json(['error' => trans('api.something_went_wrong')], 500);
+                return something_went_wrong();
         }
     }
 
@@ -664,7 +609,7 @@ class UserApiController extends Controller
             User::where('id', $request->id)->update(['device_id'=> '', 'device_token' => '']);
             return response()->json(['message' => trans('api.logout_success')]);
         } catch (Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong')], 500);
+            return something_went_wrong();
         }
     }
 
@@ -776,7 +721,7 @@ class UserApiController extends Controller
                 return response()->json(['error' => trans('api.user.user_not_found')], 500);
             }
         }   catch (Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong')], 500);
+            return something_went_wrong();
         }
 
     }
@@ -1050,7 +995,7 @@ class UserApiController extends Controller
                             
                             if($request->ajax()) {
                               
-                                return response()->json(['error' => trans('api.something_went_wrong')], 500);
+                                return something_went_wrong();
                             }else{
                                 return back()->with('flash_error', 'Something went wrong while sending request. Please try again.');
                             }
@@ -1142,7 +1087,7 @@ class UserApiController extends Controller
 
         catch (ModelNotFoundException $e) {
             if($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong')]);
+                return something_went_wrong();
             }else{
                 return back()->with('flash_error', 'No Request Found!');
             }
@@ -1201,10 +1146,6 @@ class UserApiController extends Controller
                 $promocode_name = $promocode['promo_code'];
                 $UserRequests[0]['payment']['promocode_name']=$promocode_name;
             }
-            /*$promocode_id =  $UserRequests[0]['payment']['promocode_id'];
-            $promocode =  Promocode::where('id', $promocode_id)->first();
-            $promocode_name = $promocode['promo_code'];*/
-            //$UserRequests[0]['payment']['promocode_name']="$promocode_name";
             $search_status = ['SEARCHING','SCHEDULED'];
             $UserRequestsFilter = UserRequests::UserRequestAssignProvider(Auth::user()->id,$search_status)->get(); 
 
@@ -1224,7 +1165,7 @@ class UserApiController extends Controller
             
         }   catch (Exception $e) {
             
-            return response()->json(['error' => trans('api.something_went_wrong')], 500);
+            return something_went_wrong();
         }
     }
 
@@ -1245,7 +1186,6 @@ class UserApiController extends Controller
     
         $UserRequests = UserRequests::where('id' ,$request->request_id)
                 ->where('status' ,'COMPLETED')
-                //->where('paid', 1)
                 ->where('paid', 0)
                 ->first();
         
@@ -1276,22 +1216,6 @@ class UserApiController extends Controller
                     'user_comment' => $request->comment,
                 ]);
             }
-            /*if($UserRequest->rating == null) {
-                dd('UserRequestRating');
-                    UserRequestRating::create([
-                        'provider_id' => $UserRequest->provider_id,
-                        'user_id' => $UserRequest->user_id,
-                        'request_id' => $UserRequest->id,
-                        'user_rating' => $request->rating,
-                        'user_comment' => $request->comment,
-                    ]);
-            } else {
-                    dd('else');
-                    $UserRequest->rating->update([
-                        'user_rating' => $request->rating,
-                        'user_comment' => $request->comment,
-                    ]);
-            }*/
 
             $UserRequest->user_rated = 1;
             $UserRequest->save();
@@ -1311,7 +1235,7 @@ class UserApiController extends Controller
             }
         }   catch (Exception $e) {
                 if($request->ajax()){
-                    return response()->json(['error' => trans('api.something_went_wrong')], 500);
+                    return something_went_wrong();
                 }else{
                     return back()->with('flash_error', 'Something went wrong');
                 }
@@ -1358,7 +1282,7 @@ class UserApiController extends Controller
         }
 
         catch (Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong')]);
+            return something_went_wrong();
         }
     }
 
@@ -1550,7 +1474,7 @@ class UserApiController extends Controller
 
         } catch(Exception $e) {
         	return $e;
-            return response()->json(['error' => trans('api.something_went_wrong')], 500);
+            return something_went_wrong();
         }
     }
 
@@ -1588,7 +1512,7 @@ class UserApiController extends Controller
         }
 
         catch (Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong')]);
+            return something_went_wrong();
         }
     }
 
@@ -1608,7 +1532,7 @@ class UserApiController extends Controller
                     ->get();
 
         } catch (Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong')], 500);
+            return something_went_wrong();
         }
     } 
 
@@ -1626,7 +1550,7 @@ class UserApiController extends Controller
                 }
             }
         } catch (Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong')], 500);
+            return something_went_wrong();
         }
     }
 
@@ -1688,7 +1612,7 @@ class UserApiController extends Controller
         }
         catch (Exception $e) {
             if($request->ajax()){
-                return response()->json(['error' => trans('api.something_went_wrong')], 500);
+                return something_went_wrong();
             }else{
                 return back()->with('flash_error', 'Something Went Wrong');
             }
@@ -1731,7 +1655,7 @@ class UserApiController extends Controller
         }
 
         catch (Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong')]);
+            return something_went_wrong();
         }
     }
 
@@ -1769,7 +1693,7 @@ class UserApiController extends Controller
         }
 
         catch (Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong')]);
+            return something_went_wrong();
         }
     }
 
@@ -1818,7 +1742,7 @@ class UserApiController extends Controller
 
         } catch (Exception $e) {
             if($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong')], 500);
+                return something_went_wrong();
             }else{
                 return back()->with('flash_error', 'Something went wrong while sending request. Please try again.');
             }
@@ -1849,7 +1773,7 @@ class UserApiController extends Controller
             ]);
 
         }catch(Exception $e){
-                return response()->json(['error' => trans('api.something_went_wrong')], 500);
+                return something_went_wrong();
         }
     }
 
@@ -1879,7 +1803,7 @@ class UserApiController extends Controller
 
         }catch (Exception $e) {
             if($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong')]);
+                return something_went_wrong();
             }
         }
     }
@@ -1903,7 +1827,7 @@ class UserApiController extends Controller
 
         }catch (Exception $e) {
             if($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong')]);
+                return something_went_wrong();
             }
         }
     }
@@ -1930,7 +1854,7 @@ class UserApiController extends Controller
 
         }catch (Exception $e) {
             if($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong')]);
+                return something_went_wrong();
             }
         }
     }
@@ -1995,7 +1919,7 @@ class UserApiController extends Controller
         catch (Exception $e) {
             
             if($request->ajax()){
-                return response()->json(['error' => trans('api.something_went_wrong')], 500);
+                return something_went_wrong();
             }else{
                 return back()->with('flash_error', 'Something Went Wrong');
             }
@@ -2089,17 +2013,14 @@ class UserApiController extends Controller
     }
     
     
-    public function review(Request $request)
+    public function review()
     {
         try{
             $review = UserRequestRating::select('user_rating','provider_comment','created_at')->where('user_id',Auth::user()->id)
                     ->orderBy('id', 'DESC')
                     ->get();
-            
             return response()->json(['Data' =>$review]);
-                
-           
-            
+
         } catch(Exception $e) {
             return response()->json(['error' => "Something Went Wrong"]);
         }

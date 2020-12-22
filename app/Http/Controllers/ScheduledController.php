@@ -224,7 +224,7 @@ class WebOrderController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ]);
+                return something_went_wrong();
             }
         }
     }
@@ -240,7 +240,7 @@ class WebOrderController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ]);
+                return something_went_wrong();
             }
         }
     }
@@ -263,7 +263,7 @@ class WebOrderController extends Controller {
             return response()->json($prices);
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     public function SendEmail($order_id) {
@@ -589,7 +589,7 @@ class WebOrderController extends Controller {
                 catch(Exception $e) {
                     if ($request->ajax()) {
                         return $e->getMessage();
-                        return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+                        return something_went_wrong();
                     } else {
                         return back()->with('flash_error', 'Something went wrong while sending request. Please try again.');
                     }
@@ -610,7 +610,7 @@ class WebOrderController extends Controller {
             return response()->json(['msg' => 'success done.']);
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     public function signup(Request $request) {
@@ -628,7 +628,7 @@ class WebOrderController extends Controller {
             return $User;
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     /**
@@ -642,7 +642,7 @@ class WebOrderController extends Controller {
             return response()->json(['message' => trans('api.logout_success') ]);
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     /**
@@ -716,7 +716,7 @@ class WebOrderController extends Controller {
             }
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     /**
@@ -909,7 +909,7 @@ class WebOrderController extends Controller {
                 }
                 catch(Exception $e) {
                     if ($request->ajax()) {
-                        return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+                        return something_went_wrong();
                     } else {
                         return back()->with('flash_error', 'Something went wrong while sending request. Please try again.');
                     }
@@ -1054,7 +1054,7 @@ class WebOrderController extends Controller {
                 }
                 catch(Exception $e) {
                     if ($request->ajax()) {
-                        return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+                        return something_went_wrong();
                     } else {
                         return back()->with('flash_error', 'Something went wrong while sending request. Please try again.');
                     }
@@ -1372,7 +1372,7 @@ class WebOrderController extends Controller {
         }
         catch(ModelNotFoundException $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ]);
+                return something_went_wrong();
             } else {
                 return back()->with('flash_error', 'No Request Found!');
             }
@@ -1426,7 +1426,7 @@ class WebOrderController extends Controller {
             return response()->json(['data' => $UserRequests]);
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     /**
@@ -1469,7 +1469,7 @@ class WebOrderController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+                return something_went_wrong();
             } else {
                 return back()->with('flash_error', 'Something went wrong');
             }
@@ -1500,7 +1500,7 @@ class WebOrderController extends Controller {
             return $UserRequests;
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ]);
+            return something_went_wrong();
         }
     }
     /**
@@ -1629,7 +1629,7 @@ class WebOrderController extends Controller {
         }
         catch(Exception $e) {
             return $e;
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     /**
@@ -1651,7 +1651,7 @@ class WebOrderController extends Controller {
             return $UserRequests;
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ]);
+            return something_went_wrong();
         }
     }
     /**
@@ -1665,7 +1665,7 @@ class WebOrderController extends Controller {
             return PromocodeUsage::Active()->where('user_id', Auth::user()->id)->with('promocode')->get();
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     public function check_expiry() {
@@ -1682,7 +1682,7 @@ class WebOrderController extends Controller {
             }
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     /**
@@ -1721,7 +1721,7 @@ class WebOrderController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+                return something_went_wrong();
             } else {
                 return back()->with('flash_error', 'Something Went Wrong');
             }
@@ -1749,7 +1749,7 @@ class WebOrderController extends Controller {
             return $UserRequests;
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ]);
+            return something_went_wrong();
         }
     }
     /**
@@ -1771,7 +1771,7 @@ class WebOrderController extends Controller {
             return $UserRequests;
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ]);
+            return something_went_wrong();
         }
     }
     /**
@@ -1802,7 +1802,7 @@ class WebOrderController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+                return something_went_wrong();
             } else {
                 return back()->with('flash_error', 'Something went wrong while sending request. Please try again.');
             }
@@ -1820,7 +1820,7 @@ class WebOrderController extends Controller {
             return response()->json(['message' => 'OTP sent to your email!', 'user' => $user]);
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+            return something_went_wrong();
         }
     }
     /**
@@ -1840,7 +1840,7 @@ class WebOrderController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ]);
+                return something_went_wrong();
             }
         }
     }
@@ -1857,7 +1857,7 @@ class WebOrderController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ]);
+                return something_went_wrong();
             }
         }
     }
@@ -1875,7 +1875,7 @@ class WebOrderController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ]);
+                return something_went_wrong();
             }
         }
     }
@@ -1905,7 +1905,7 @@ class WebOrderController extends Controller {
         }
         catch(Exception $e) {
             if ($request->ajax()) {
-                return response()->json(['error' => trans('api.something_went_wrong') ], 500);
+                return something_went_wrong();
             } else {
                 return back()->with('flash_error', 'Something Went Wrong');
             }

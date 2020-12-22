@@ -161,7 +161,7 @@ class HomeController extends Controller {
             return $AdminHelps;
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ]);
+            return something_went_wrong();
         }
     }
     public function helps() {
@@ -174,7 +174,7 @@ class HomeController extends Controller {
             return $AdminTerms;
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ]);
+            return something_went_wrong();
         }
     }
     public function terms() {
@@ -187,7 +187,7 @@ class HomeController extends Controller {
             return $AdminFaq;
         }
         catch(Exception $e) {
-            return response()->json(['error' => trans('api.something_went_wrong') ]);
+            return something_went_wrong();
         }
     }
     public function faqs() {
