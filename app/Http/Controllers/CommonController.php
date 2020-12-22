@@ -32,10 +32,7 @@ class CommonController extends Controller
     
     public function index(Request $request) {
     	    
-		$data['services'] 	=	ServiceType::all();   
-		//$details 				=	$this->getIpDetails();
-		//$data['services'] 		=	$details['services'];
-		//$data['ip_details']		=	$details['ip_details'];
+		$data['services'] 	=	ServiceType::all();
 		$data['testimonials']	=	Testimonial::orderBy('id', 'desc')->take(8)->get();
 	
 		return view('index', ['data' => $data ]);
@@ -139,18 +136,8 @@ class CommonController extends Controller
             $message = new Complaint();
             $message->name          =   $request->name;
             $message->email         =   $request->email;        
-            // $message->subject       =   $request->subject;
             $message->transfer       =   $request->transfer;
             $message->message       =   $request->message;
-            //$message->type         =    $url[1];
-            
-            // if ($request->hasFile('attachment')) {
-            //     $file = $request->file('attachment');
-            //     $name = time().'.'.$file->getClientOriginalExtension();
-            //     $destinationPath = public_path('/uploads');
-            //     $file->move($destinationPath, $name);
-            //     $message->attachment    =   $name;
-            // }
             
             $message->save();
          
@@ -353,10 +340,7 @@ class CommonController extends Controller
     }
      public function refund_policy() {
        return $this->commonpage('refund-policy');
-    }
-    //  public function fee_estimation() {
-    //    return $this->commonpage('fee-estimate');
-    // }
+    }    
      public function help() {
       return  $this->commonpage('help');
     }
@@ -364,7 +348,6 @@ class CommonController extends Controller
        return $this->commonpage('terms-conditions');
     }
     public function why_us() {
-        // return view('user.layout.why_us');
        return $this->commonpage('why-us');
     }
     public function commonpage($val) {
@@ -377,13 +360,6 @@ class CommonController extends Controller
     {
         return view('downloadpage');
     }
-	
-	 
-
-    // public function help()
-    // {
-    //     return view('user.layout.help');		
-    // }
     
     public function driver_story () {
 
@@ -442,37 +418,10 @@ class CommonController extends Controller
                 DB::table('user_requests')
                     ->where('status', 'SEARCHING')
                     ->update(['status' => "CANCELLED"]);
-                //return 1;
             }
         }
     }
-    
-    public function ajaxforofflineprovider(Request $request)
-    {
-                      //  \Log::info('just testing');
-                    
-       /* $allrequests  = DB::table('providers')->select('updated_at','id')->where('status','!=', 'riding')->get();
         
-        foreach($allrequests as $request)
-        {
-            $time = new \DateTime($request->updated_at);
-            $diff = $time->diff(new DateTime());
-            $minutes = ($diff->days * 24 * 60) +
-                       ($diff->h * 60) + $diff->i;
-
-                       echo $request->id.':'.$minutes. ' , <br/>';
-
-            if($minutes > 1)
-            {
-
-               $data = ProviderService::where('provider_id',$request->id)->update(['status' =>'offline']);
-            }
-        }*/
-        
- //echo "ajaxforofflineprovider";
-        //return $expected;
-    }
-    
     public function providerDocumentExpiryNotification(){
         $docs = ProviderDocument::with('provider','document')->where('expires_at','>=', Carbon::now()->toDateString())->get();
         foreach($docs as $doc){

@@ -15,9 +15,7 @@ use DB;
 
 
 if (version_compare(PHP_VERSION, '7.2.0', '>=')) {
-    // Ignores notices and reports all other kinds... and warnings
     error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
-    // error_reporting(E_ALL ^ E_WARNING); // Maybe this is enough
 }
 
 
@@ -92,8 +90,6 @@ class AdminController extends Controller
 
     private static function last7DaysTrip(){
 
-    //Carbon::parse($date->created_at)->format('1')
-
     $days_arr =array();
 
     $last7days_rides= UserRequests::whereDate('created_at','>=', Carbon::now()->subDays(7)) ->groupBy('created_at')->select('created_at', DB::raw('count(*) as total'))->get();
@@ -105,7 +101,6 @@ class AdminController extends Controller
           
           $day = Carbon::now()->format( 'F' );
           
-         // $value->format('l'); total
          $day_name= Carbon::parse($value->created_at)->format('D'); 
          $days_arr[$day_name]= array($day_name, (float) $value->total);
      }
@@ -131,16 +126,12 @@ class AdminController extends Controller
         }
 
      return $days; 
-    //print_r($days);die;
 
 }
 
 
 
 private static function last7DaysTripRe(){
-
-    //Carbon::parse($date->created_at)->format('1')
-
     $days_arr =array();
 
     $last7days_rides= UserRequests::whereDate('created_at','>=', Carbon::now()->subDays(7)) ->groupBy('created_at','id')->select('created_at','id', DB::raw('count(*) as total'))->where('status','COMPLETED')->get();
@@ -153,8 +144,6 @@ private static function last7DaysTripRe(){
      foreach ($last7days_rides as $key => $value) { 
           
           $day = Carbon::now()->format( 'F' );
-
-         // $value->format('l');
          $day_name= Carbon::parse($value->created_at)->format('D'); 
 
            
@@ -190,8 +179,6 @@ private static function last7DaysTripRe(){
         }
 
      return $days; 
-    //print_r($days);die;
-
 
 }
 
@@ -1071,7 +1058,6 @@ public function allocation_list()
         $data = [
             
             'fare_setting_id'=>$request->fare_setting_id,
-            // 'category'=>$request->category,
             'cab_id'=>$request->cab_id,
             'zone_id'=>$request->provider_id,
             'description'=>$request->description           
@@ -1084,13 +1070,11 @@ public function allocation_list()
     
     public function cabAllocation_edit($id){
         $package = Package::where('id',$id)->orderBy('id','desc')->first();
-       // foreach($package as $k=>$v){
        $package['plan_name'] = FareSetting::where('id',$package->fare_setting_id)->value('fare_plan_name');
        $package['service_name'] = ServiceType::where('id',$package->cab_id)->value('name');
        $services = ServiceType::select('id','name')->whereNotIn('name',['Pool'])->get();
        $fare = FareSetting::select('id','fare_plan_name','from_km','upto_km')->get();
        $zones = Zones::orderBy('created_at' , 'desc')->get();
-       // }
         return view('admin.service.allocation_edit',compact('package','services','zones','fare'));
     }
 
@@ -1141,7 +1125,6 @@ public function allocation_list()
             $service->description = $request->description;
             $service->save();
             return redirect()->route('admin.service.index')->with('flash_success', 'Service Type Updated Successfully'); 
-            // return redirect('admin/allocation_list')->with('flash_success','Updated successfully');   
         } 
 
         catch (ModelNotFoundException $e) {

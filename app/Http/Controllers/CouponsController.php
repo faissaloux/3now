@@ -12,10 +12,7 @@ class CouponsController extends Controller {
         $coupons = Coupons::orderby('id','desc')->paginate(10);
         return view('admin.coupons.index',compact('coupons'));     
     }
-
-
     
-
     public function create() {
        $users = \App\User::all('id','first_name','last_name')->toArray();
         return view('admin.coupons.create', compact('users'));     
@@ -60,22 +57,6 @@ class CouponsController extends Controller {
         );
         return redirect()->route('admin.coupons.home')->with($notification);
     }
-
-    /*/ Update coupon record
-    public  function update(Request $request, $id){
-        $this->validate($request, [
-            'coupon' => 'required',
-            'discount' => 'required|max:3'
-        ]);
-        $input = $request->all();
-        $coupon = Coupon::whereId($id)->first();
-        $coupon->update($input);
-        $notification = array(
-            'message' => 'Coupon successfully updated.',
-            'alert-type' => 'success'
-        );
-        return redirect()->route('admin.coupons.index')->with($notification);
-    }*/
 
     // Update coupon record
     public  function update(Request $request, $id){
