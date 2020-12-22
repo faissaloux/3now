@@ -107,33 +107,8 @@ class TripController extends Controller
             $commission = UserRequestPayment::whereIn('request_id', $totalride)->sum('commision');
             $earnings = $totalEarning-$commission;
             $earnings = number_format($earnings, 2);
-            //$earnings = $rev->revenue;
-            //$commision = $rev->revenue;
-
-//$is_empty = !empty($request->latitude) ? ' latitude not empty ' : 'latitude empty';
-/*
-                        \Log::info('latitude :'.$request->latitude);
-                        \Log::info('longitude :'.$request->longitude);
-                        \Log::info('user_id :'. Auth::user()->id.' , '. $is_empty);
-
-                $data = [
-                    'lat' => $request->latitude,
-                    'lon' => $request->longitude,
-                    'user_id' => Auth::user()->id,
-                ];
-*/
-                   // \DB::table('test_addresses')->insert($data);
 
             if(!empty($request->latitude)) {
-
-                    /*
-                
-
-                \Log::inf($data);
-
-                \DB::table('test_addresses')->insert($data);
-        */
-
 
                 $point[0] = $request->latitude;
                 $point[1] = $request->longitude;
@@ -645,17 +620,7 @@ class TripController extends Controller
                     catch(Exception $ex){
                         echo $ex->getMessage();
                     }
-
-                             
-                    //Log::info($ex->getMessage());
-                    
-                
-
-
-				
 			}
-
-       
             return $UserRequest;
 
         } catch (ModelNotFoundException $e) {

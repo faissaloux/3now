@@ -598,13 +598,6 @@ class TripController extends Controller
                     catch(Exception $ex){
                         echo $ex->getMessage();
                     }
-
-                             
-                    //Log::info($ex->getMessage());
-                    
-                
-
-
 				
 			}
 

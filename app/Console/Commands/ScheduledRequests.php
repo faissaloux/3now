@@ -32,7 +32,6 @@ class ScheduledRequests extends Command
 
     /**
      * Execute the console command.
-     *        \Log::info("Cron is working fine!");
 
      * @return mixed
      */
