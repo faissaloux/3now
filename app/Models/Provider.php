@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Notifications\ProviderResetPassword;
 use Illuminate\Notifications\Notifiable;

@@ -1148,10 +1148,7 @@ public function allocation_list()
             return back()->with('flash_error', 'Service Type Not Found');
         }
     }
-<<<<<<< HEAD
-}
-=======
-
+    
     public function changeProvider(){
         $request_id = $_POST['request'];
         $provider_id = $_POST['provider'];
@@ -1176,4 +1173,3 @@ public function allocation_list()
         return response()->json(['sucess' => 'done']);
     }
 }
->>>>>>> 5b4310696531f94807a0605b313aec328d0e6f8e

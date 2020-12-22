@@ -52,11 +52,6 @@ function image($img){
 	}
 }
 
-function promo_used_count($promo_id)
-{
-	return PromocodeUsage::where('status','ADDED')->where('promocode_id',$promo_id)->count();
-}
-
 function curl($url)
 {
     $ch = curl_init();
@@ -82,10 +77,6 @@ function get_new_provider()
 {
     
 	return Provider::orderBy('id', 'desc')->limit(3)->get();
-}
-
-function getPages(){
-	return $pageList   = Page::all();
 }
 
 function getLatlngZone_id( $point ) {
@@ -175,33 +166,3 @@ function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
     }
     return $output;
 }
-
-function getLatAndLongByLocation($locaton){
-
-	$country =ip_info("Visitor", $locaton);
-
-    //$address =$country['city'].",".$country['country'];
-	//echo "<pre/>";
-        //  print_r($country);die;
-	$latLngs  =array(); 
-	$geocode_stats = file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=".$country."&sensor=false"); 
-	$output_deals = json_decode($geocode_stats); 
-
-         if(isset($output_deals->results[0]) && !empty($output_deals->results[0])){
-            	$latLng = $output_deals->results[0]->geometry->location; 
-            	$latLngs['lat'] = $latLng->lat;
-            	$latLngs['lng'] = $latLng->lng;
-          }else{
-                $latLngs['lat'] ='28.644800';
-                $latLngs['lng'] ='77.216721';
-          }
-          //echo "<pre/>";
-          //print_r($latLngs);die;
-	 
-	return $latLngs;
-  
-}
-function activeOffline(){
-
-        return $status = ProviderService::select('status')->where('provider_id',Auth::guard('provider')->user()->id)->first();
-        }
