@@ -1169,4 +1169,32 @@ public function allocation_list()
             return back()->with('flash_error', 'Service Type Not Found');
         }
     }
+<<<<<<< HEAD
 }
+=======
+
+    public function changeProvider(){
+        $request_id = $_POST['request'];
+        $provider_id = $_POST['provider'];
+
+
+        $user_request = \App\UserRequests::find($request_id);
+
+        if($user_request){
+
+            $user_request->provider_id = $provider_id;
+            $user_request->current_provider_id = $provider_id;
+            $user_request->save();
+        }
+
+        $filter = \App\RequestFilter::where('request_id',$request_id)->first();
+
+        if($filter){
+            $filter->provider_id = $provider_id;
+            $filter->save();
+        }
+
+        return response()->json(['sucess' => 'done']);
+    }
+}
+>>>>>>> 5b4310696531f94807a0605b313aec328d0e6f8e
