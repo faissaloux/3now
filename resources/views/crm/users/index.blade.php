@@ -32,9 +32,6 @@
          <div class="box box-block bg-white">
             <h5 class="mb-1"> <i class="ti-user"></i>&nbsp;
                Users
-               @if(Setting::get('demo_mode', 0) == 1)
-                  <span class="pull-right">(*persönliche Informationen in der Demo versteckt)</span>
-               @endif
             </h5>
             <hr>
             <a href="{{ route('crm.user.create') }}" style="margin-left: 1em;" class="btn btn-success pull-right btn-rounded shadow-box"><i class="fa fa-plus"></i> Neue hinzufügen</a>
@@ -58,16 +55,9 @@
                      <td>{{ $index + 1 }}</td>
                      <td>picture</td>
                      <td>{{ $user->first_name }}</td>
-                     @if(Setting::get('demo_mode', 0) == 1)
-                        <td>{{ substr($user->email, 0, 3).'****'.substr($user->email, strpos($user->email, "@")) }}</td>
-                     @else
                         <td>{{ $user->email }}</td>
-                     @endif
-                     @if(Setting::get('demo_mode', 0) == 1)
                         <td>+919876543210</td>
-                     @else
                         <td>{{ $user->mobile }}</td>
-                     @endif
                      <td>{{ $user->rating }}</td>
                      <td>Fahrten</td>
                      <td>{{ currency().$user->wallet_balance }}</td>
@@ -77,9 +67,6 @@
                            <input type="hidden" name="_method" value="DELETE"/>
                            <a href="{{ route('crm.user.request', $user->id) }}" class="btn btn-black shadow-box"><i class="fa fa-search"></i> </a>
                            <a href="{{ route('crm.user.edit', $user->id) }}" class="btn btn-success shadow-box"><i class="fa fa-pencil"></i> </a>
-                           <!--change by 101-->
-                           <!-- <a href="#" class="btn btn-info"> Suspend</a>
-                           <a href="#" class="btn btn-info"> Hold</a> -->
                            <button class="btn btn-danger shadow-box" onclick="return confirm('Bist du sicher?')"><i class="fa fa-trash"></i> </button>
                         </form>
                      </td>

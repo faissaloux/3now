@@ -64,16 +64,11 @@ class ProviderInCrmResource extends Controller
      */
     public function store(Request $request)
     {
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error', 'Disabled for demo purposes! Please contact us at crm.com');
-        }
 
         $this->validate($request, [
             'first_name' 	=> 'required|max:255',
-            // 'last_name' 	=> 'required|max:255',
             'email' 		=> 'required|unique:providers,email|email|max:255',
             'mobile' 		=> 'digits_between:6,13',
-            //'avatar' 		=> 'mimes:jpeg,jpg,bmp,png|max:5242880',
             'password' 		=> 'required|min:6|confirmed',
 			'service_type'	=> 'required',
 			'service_number'=>	'required',
@@ -175,9 +170,7 @@ class ProviderInCrmResource extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error', 'Disabled for demo purposes! Please contact us at info@appoets.com');
-        }
+        
 
         $this->validate($request, [
             'first_name' => 'required|max:255',
@@ -238,9 +231,7 @@ class ProviderInCrmResource extends Controller
      */
     public function destroy($id)
     {
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error', 'Disabled for demo purposes! Please contact us at info@appoets.com');
-        }
+        
 
         try {
 			
@@ -294,9 +285,7 @@ class ProviderInCrmResource extends Controller
      */
     public function disapprove($id)
     {
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error', 'Disabled for demo purposes! Please contact us at info@appoets.com');
-        }
+        
         
         Provider::where('id',$id)->update(['status' => 'banned']);
         return back()->with('flash_success', "Provider Disapproved");

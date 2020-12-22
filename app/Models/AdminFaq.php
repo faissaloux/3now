@@ -26,4 +26,4 @@ class AdminFaq extends Model
     }
 }    
 
-?>    
+?>

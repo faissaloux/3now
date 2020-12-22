@@ -85,13 +85,6 @@ class RegisterController extends Controller
             'service_number' => $data['service_number'],
             'service_model' => ( $data['service_model']) ? $data['service_model'] : '',
         ]);
-
-        if(Setting::get('demo_mode', 0) == 1) {
-            $Provider->update(['status' => 'approved']);
-            $provider_service->update([
-                'status' => 'active',
-            ]);
-        }
         
         return $Provider;
     }

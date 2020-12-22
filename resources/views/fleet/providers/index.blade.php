@@ -8,9 +8,6 @@
         <div class="box box-block bg-white">
             <h5 class="mb-1">
                <span class="s-icon"><i class="ti-car"></i></span>&nbsp; Providers
-                @if(Setting::get('demo_mode', 0) == 1)
-                <span class="pull-right">(*personal information hidden in demo)</span>
-                @endif
             </h5><hr>
             <a href="{{ route('fleet.provider.create') }}" style="margin-left: 1em;" class="btn btn-success btn-rounded shadow-box pull-right"><i class="fa fa-plus"></i> Add New Provider</a>
             <table class="table table-striped table-bordered dataTable" id="table-2">
@@ -33,16 +30,9 @@
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $provider->first_name }} {{ $provider->last_name }}</td>
-                        @if(Setting::get('demo_mode', 0) == 1)
-                        <td>{{ substr($provider->email, 0, 3).'****'.substr($provider->email, strpos($provider->email, "@")) }}</td>
-                        @else
                         <td>{{ $provider->email }}</td>
-                        @endif
-                        @if(Setting::get('demo_mode', 0) == 1)
                         <td>+919876543210</td>
-                        @else
                         <td>{{ $provider->mobile }}</td>
-                        @endif
                         <td>{{ $provider->total_requests }}</td>
                         <td>{{ $provider->accepted_requests }}</td>
                         <td>{{ $provider->total_requests - $provider->accepted_requests }}</td>

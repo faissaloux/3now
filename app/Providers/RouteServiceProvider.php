@@ -23,8 +23,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
     }
 
@@ -49,14 +47,11 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapAdminRoutes();
         
-        $this->mapCmsRoutes();
-
        $this->mapCrmRoutes();
         
         $this->mapProviderApiRoutes();
-        $this->mapSupportRoutes();
 
-        //
+        $this->mapSupportRoutes();
     }
 
     /**
@@ -79,18 +74,7 @@ class RouteServiceProvider extends ServiceProvider
     }
     
 
-    protected function mapCmsRoutes()
-    {
-        Route::group([
-            'middleware' => ['web', 'cms', 'auth:cms'],
-            'prefix' => 'cms',
-            'as' => 'cms.',
-            'namespace' => $this->namespace,
-        ], function ($router) {
-            
-            require base_path('routes/cms.php');
-        });
-    }
+
     protected function mapCrmRoutes()
     {
         Route::group([

@@ -57,16 +57,7 @@ class SocialLoginController extends Controller
                         $new->login_by="facebook";
                         $new->save();
 
-                        if(Setting::get('demo_mode', 0) == 1) {
-                            $new->update(['status' => 'approved']);
-                            ProviderService::create([
-                                'provider_id' => $new->id,
-                                'service_type_id' => '1',
-                                'status' => 'active',
-                                'service_number' => '4pp03ets',
-                                'service_model' => 'Audi R8',
-                            ]);
-                        }
+                        
                         Auth::guard('provider')->loginUsingId($new->id);
                         return redirect('provider');
                     }
@@ -232,16 +223,7 @@ class SocialLoginController extends Controller
                             $new->login_by="google";
                             $new->save();
 
-                            if(Setting::get('demo_mode', 0) == 1) {
-                                $new->update(['status' => 'approved']);
-                                ProviderService::create([
-                                    'provider_id' => $new->id,
-                                    'service_type_id' => '1',
-                                    'status' => 'active',
-                                    'service_number' => '4pp03ets',
-                                    'service_model' => 'Audi R8',
-                                ]);
-                            }
+                            
                             Auth::guard('provider')->loginUsingId($new->id);
                             return redirect()->route('provider');
                         }

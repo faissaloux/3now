@@ -8,9 +8,6 @@
         <div class="box box-block bg-white">
             <h5 class="mb-1">
                 <i class="ti-headphone"></i>&nbsp;Dispatcher<hr>
-                @if(Setting::get('demo_mode', 0) == 1)
-                <span class="pull-right">(*persönliche Informationen in der Demo versteckt)</span>
-                @endif
             </h5>
             <a href="{{ route('admin.dispatch-manager.create') }}" style="margin-left: 1em;" class="btn shadow-box btn-success btn-rounded pull-right"><i class="fa fa-plus"></i> Neuen Dispatcher hinzufügen</a>
             <table class="table table-striped table-bordered dataTable" id="table-2" width="100%">
@@ -28,16 +25,8 @@
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $dispatcher->name }}</td>
-                        @if(Setting::get('demo_mode', 0) == 1)
-                        <td>{{ substr($dispatcher->email, 0, 3).'****'.substr($dispatcher->email, strpos($dispatcher->email, "@")) }}</td>
-                        @else
                         <td>{{ $dispatcher->email }}</td>
-                        @endif
-                        @if(Setting::get('demo_mode', 0) == 1)
-                        <td>+919876543210</td>
-                        @else
                         <td>{{ $dispatcher->mobile }}</td>
-                        @endif
                         <td>
                             <form action="{{ route('admin.dispatch-manager.destroy', $dispatcher->id) }}" method="POST">
                                 {{ csrf_field() }}

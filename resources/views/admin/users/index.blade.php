@@ -26,17 +26,8 @@
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $user->first_name }}</td>
-                        
-                        @if(Setting::get('demo_mode', 0) == 1)
-                        <td>{{ substr($user->email, 0, 3).'****'.substr($user->email, strpos($user->email, "@")) }}</td>
-                        @else
                         <td>{{ $user->email }}</td>
-                        @endif
-                        @if(Setting::get('demo_mode', 0) == 1)
-                        <td>+919876543210</td>
-                        @else
                         <td>{{ $user->mobile }}</td>
-                        @endif
                         <td>{{ $user->rating }}</td>
                         <td>{{ currency($user->wallet_balance) }}</td>
                         <td>

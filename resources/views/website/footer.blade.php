@@ -59,12 +59,6 @@
                                     <li><a href="/page/datenschutz" class="hboynas2">Datenschutz-Bestimmungen</a></li>
                                     <li><a href="/page/agb">AGB</a></li>
                                     <li><a href="/page/terms-and-conditions">Fragen und Antworten</a></li>
-
-							<!--@foreach(getPages() as $list)
-                            @if($list->slug == 'about-us' || $list->slug == 'refund-policy' || $list->slug == 'why-us' || $list->slug == 'privacy-policy' || $list->slug == 'terms-conditions')
-								<li><a href="{{ url('').'/'.$list->slug }}">{{ucfirst($list->title)}}</a></li>
-                                @endif
-							@endforeach-->
                         </ul>
                     </div>
                 </div>

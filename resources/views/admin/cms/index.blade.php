@@ -6,9 +6,6 @@
       <div class="box box-block bg-white">
          <h5 class="mb-1">
             <i class="ti-layout-media-left-alt"></i>&nbsp;CMS User
-            @if(Setting::get('demo_mode', 0) == 1)
-            <span class="pull-right">(*personal information hidden in demo)</span>
-            @endif
          </h5>
          <hr>
          <a href="{{ route('admin.cms-manager.create') }}" style="margin-left: 1em;" class="btn shadow-box btn-rounded btn-success pull-right"><i class="fa fa-plus"></i> Neue hinzufügen</a>
@@ -27,16 +24,8 @@
                <tr>
                   <td>{{ $index + 1 }}</td>
                   <td>{{ $cms->name }}</td>
-                  @if(Setting::get('demo_mode', 0) == 1)
-                  <td>{{ substr($cms->email, 0, 3).'****'.substr($cms->email, strpos($cms->email, "@")) }}</td>
-                  @else
                   <td>{{ $cms->email }}</td>
-                  @endif
-                  @if(Setting::get('demo_mode', 0) == 1)
-                  <td>+919876543210</td>
-                  @else
                   <td>{{ $cms->mobile }}</td>
-                  @endif
                   <td>
                      <form action="{{ route('admin.cms-manager.destroy', $cms->id) }}" method="POST">
                         {{ csrf_field() }}
