@@ -83,7 +83,6 @@ class CouponsController extends Controller {
             'code' => 'required',
             'discount' => 'required|max:3'
         ]);
-        //dd($request);
 
 
         $coupon = Coupons::whereId($id)->first();

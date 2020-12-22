@@ -52,7 +52,7 @@ class DispatcherController extends Controller
      */
     
     public function index()
-    {	//dd('hii');
+    {
         $services  	= 	ServiceType::all();
 		$all_zones	=	$this->getZonesWithProvider();
 		$companies  =	DB::table('fleets')->get();

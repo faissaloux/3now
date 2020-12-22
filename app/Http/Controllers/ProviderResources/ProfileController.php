@@ -11,13 +11,7 @@ use Auth;
 use Setting;
 use Storage;
 use Exception;
-use Carbon\Carbon;
-use App\Provider;
-use App\ProviderProfile;
-use App\UserRequests;
-use App\ProviderService;
-use App\Fleet;
-use App\UserRequestPayment;
+use App\Models\{ProviderProfile,UserRequests,ProviderService,Fleet,UserRequestPayment};
 
 class ProfileController extends Controller
 {
@@ -66,7 +60,6 @@ class ProfileController extends Controller
 
         $this->validate($request, [
                 'first_name' => 'required|max:255',
-                // 'last_name' => 'required|max:255',
                 'mobile' => 'required',
                 'avatar' => 'mimes:jpeg,bmp,png',
                 'language' => 'max:255',
@@ -85,9 +78,6 @@ class ProfileController extends Controller
             if($request->has('first_name')) 
                 $Provider->first_name = $request->first_name;
 
-            // if($request->has('last_name')) 
-            //     $Provider->last_name = $request->last_name;
-
             if ($request->has('mobile'))
                 $Provider->mobile = $request->mobile;
 
@@ -101,7 +91,6 @@ class ProfileController extends Controller
                     if($Provider->service->service_type_id != $request->service_type) {
                         $Provider->status = 'banned';
                     }
-                    //$ProviderService = ProviderService::find(Auth::user()->id);
                     $ProviderService = ProviderService::find($Provider->service->id);
                     $ProviderService->service_type_id = $request->service_type;
                     $ProviderService->service_number = $request->service_number;
@@ -149,7 +138,6 @@ class ProfileController extends Controller
         }
 
         catch (ModelNotFoundException $e) {
-            // (dd($e->getMessage()));
             return response()->json(['error' => 'Driver Not Found!'], 404);
         }
     }
@@ -314,19 +302,6 @@ class ProfileController extends Controller
         }
         
         return $Provider;
-        
-
-
-        
-        /*
-        $details = [$Provider->id,$Provider->first_name,$request->service_status,$source];
-
-        $details = json_encode($details);
-
-        \DB::table('logs')->insert(['action'=>'check_variable','details'=>$details]);
-        Log::info($Provider);
-        Log::info($request->service_status);
-        */
    
     }
 
@@ -363,52 +338,12 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
      
-    /*public function target(Request $request)
-    {
-       
-        try{
- 
-            $Providers = Provider::all();
-
-            foreach($Providers as $index => $Provider)
-            {
-                
-                if($Provider->id==Auth::user()->id)
-                {
-                    $Rides = UserRequests::where('provider_id',$Provider->id)
-                            ->where('status','<>','CANCELLED')
-                            ->get()->pluck('id');
-
-                    $Providers[1]->rides_count = $Rides->count();
-    
-                    $Providers[1]->payment = UserRequestPayment::whereIn('request_id', $Rides)
-                                    ->select(\DB::raw(
-                                       'SUM(ROUND(fixed) + ROUND(distance)) as overall, SUM(ROUND(commision)) as commission' 
-                                    ))->get();
-                }
-                
-            }
-            
-            return response()->json([
-                    'rides' => $Rides,
-                    'rides_count' => $Providers,
-                    'target' => Setting::get('daily_target','0'),
-					'user' => Auth::user()->id,
-                ]);
-
-            //return view('admin.providers.provider-statement', compact('Providers'))->with('page','Providers Statement');
-
-        } catch (Exception $e) {
-            return back()->with('flash_error','Something Went Wrong!');
-        }
-    }*/
     public function target(Request $request)
     {
         try {
             
             $Ridesdata = UserRequests::where('provider_id', Auth::user()->id)
                     ->where('status', 'COMPLETED')
-                    //->where('created_at', '>=', Carbon::today())
                     ->with('payment', 'service_type')
                     ->get();
                     
@@ -416,13 +351,6 @@ class ProfileController extends Controller
                             ->where('status','<>','CANCELLED')
                             ->get()->pluck('id');
 
-            //$Providers->rides_count = $Rides->count();
-
-           /* $Providers  = UserRequestPayment::whereIn('request_id', $Rides)
-                            ->select(\DB::raw(
-                               'SUM(ROUND(fixed) + ROUND(distance)) as overall, SUM(ROUND(commision)) as commission' 
-                            ))->get();
-                            */
         $Earn = UserRequestPayment::whereHas('request', function($query) use ($request) {
                                 $query->where('provider_id', Auth::user()->id);
                             })
@@ -435,7 +363,6 @@ class ProfileController extends Controller
         $totalEarn =    $Earn-$commision;
         $totalEarn? : 0;  
             
-            //dd($Providers);
             return response()->json([
                     'rides' => $Ridesdata,
                     'rides_count' => ['overall'=>round($totalEarn,2),'commission'=>round($commision,2)],

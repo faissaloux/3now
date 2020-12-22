@@ -126,16 +126,11 @@ class CommonController extends Controller
        public function complaint_form(Request $request) {
 
         $json = array();
-        //$data = str_replace(url('/'), '', url()->previous());
-        //dd($data);
-        //$u = explode('?', $data);
-        //$url = explode('=', $u[1]);
         $this->validate($request,[
             'name'      => 'required',
             'email'     => 'required|email',
             'transfer'   => 'required',
             'message'   => 'required',
-            // 'phone'     => 'required',
             
             ]);
             

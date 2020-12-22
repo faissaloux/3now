@@ -251,9 +251,6 @@ class UserApiController extends Controller
                             if($request->has('schedule_date') && $request->has('schedule_time')){
                                 $UserRequest->schedule_at = date("Y-m-d H:i:s",strtotime("$request->schedule_date $request->schedule_time"));
                             }
-                            //$checkrequest = UserRequests::where('status','')->where('user_id', Auth::user()->id)->get();
-
-                            //dd($checkrequest);
                         
                             $UserRequest->save();
                             $data = array(
@@ -264,14 +261,6 @@ class UserApiController extends Controller
                                 'drivername'    => $Providers[0]->first_name,
                                 'drivermobile'  => $Providers[0]->mobile
                             );
-                
-                            /*
-                             //Send New Request Email to Admin
-                            Mail::send('emails.new_request_notification', [ 'data' => $data ] , function($message) use ($data) {
-                                $message->to( config('mail.admin.address') )->subject('New Request Accepted By Driver | Wedrive ');
-                                $message->from( config('mail.from.address' ) , config('mail.from.name') );
-                            });
-                            */
 
                             Log::info('New Request id : '. $UserRequest->id .' Assigned to provider : '. $UserRequest->current_provider_id);
                 
@@ -1382,7 +1371,6 @@ class UserApiController extends Controller
 	     $data->user_name = Auth::user()->first_name;
 	     $data->provider_name = Provider::where('id',$data->provider_id)->value('first_name');
 	     $data->provider_picture = Provider::where('id',$data->provider_id)->value('avatar');
-	     //dd($data);
 	     return $data;
 	 }
 
@@ -1470,7 +1458,6 @@ class UserApiController extends Controller
       
 		    $fareSetting = FareSetting::where('from_km','<=',round($kilometer,0))
 		    	->where('upto_km','>=',round($kilometer,0))
-		    	//->where('peak_hour','YES')
 		   		->where('status',1)
 		     	->orderBy('id','DESC')
 		     	->first();
@@ -1525,7 +1512,6 @@ class UserApiController extends Controller
 	            $total = $price + $tax_price;
 				//
 		    }		
-      /////////////////////////////////////////////////////////////////////////////////////////////
 			//sid
 			if ( $request->has('promo_code') ) {
 				// Apply  promo code
@@ -1548,14 +1534,6 @@ class UserApiController extends Controller
 
             $surge = 0;
             
-            // if($Providers->count() <= Setting::get('surge_trigger') && $Providers->count() > 0){
-            //     $surge_price = (Setting::get('surge_percentage')/100) * $total;
-            //     $total += $surge_price;
-            //     $surge = 1;
-            // }
-            
-
-
 
             $here = bcdiv($total,1,2);
 
@@ -1610,8 +1588,6 @@ class UserApiController extends Controller
                     'estimated_fare' => $khla, 
                     'distance' => $kilometer,
                     'time' => $time,
-                    //'surge' => $surge,
-                   // 'surge_value' => '1.4X',
                     'tax_price' => bcdiv($tax_price,1,2),
                     'base_price' => $service_type->fixed,
                     'wallet_balance' => Auth::user()->wallet_balance,
@@ -1770,8 +1746,6 @@ class UserApiController extends Controller
     public function remove_promocode(Request $request)
     {
         $deletepromo = PromocodeUsage::where('promocode_id',$request->id)->delete();
-        dd($deletepromo);
-        //PromocodeUsage::where('promocode_id',$find_promo->id)
     }
 
     /**
@@ -1916,13 +1890,6 @@ class UserApiController extends Controller
             
             $user = User::where('email' , $request->email)->first();
 
-            // $otp = mt_rand(100000, 999999);
-
-            // $user->otp = $otp;
-            // $user->save();
-
-            // Notification::send($user, new ResetPasswordOTP($otp));
-
             return response()->json([
                 'message' => 'OTP sent to your email!',
                 'user' => $user
@@ -2037,42 +2004,6 @@ class UserApiController extends Controller
 		
 		 
 		(new SendPushNotification)->WalletMoney(31, 50 ); 
-		
-	/*
-		$message = 'sid jangra';
-		$to = 'fMT0lMedUYs:APA91bFQt984-yy3U8OvcjrcIrmAWOOZh1KPIDmcWTtegVvKmG2EdYhQM7W2jvbI6sYY6moplk3IQx_GiNPrJBoV0OwKxJKQzY8VY5dQWSJo5vTjriVc4MnZTaf8xwY4LhcEVtDwLxXe';
-		$url = 'https://fcm.googleapis.com/fcm/send';
-
-		$fields = array (
-				'registration_ids' => array (
-						$id
-				),
-				'notification' => array (
-						"message" => $message
-				)
-		);
-		$fields = json_encode ( $fields );
-
-		$headers = array (
-				'Authorization: key=' . "AAAADy0gw_I:APA91bHJfnAsBLAqLymWggX-wL4Mej3Lp65JMekHfcCyojUqvwMG2CWrPm89Ggtb2BHifyFF1CETpGgShYm-n11Dtg340ZeWrM4XZD0kNASdlAjaSBaxoz06-od6bHKRClYSOMTv9KC0",
-				'Content-Type: application/json'
-		);
-
-		$ch = curl_init ();
-		curl_setopt ( $ch, CURLOPT_URL, $url );
-		curl_setopt ( $ch, CURLOPT_POST, true );
-		curl_setopt ( $ch, CURLOPT_HTTPHEADER, $headers );
-		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
-		curl_setopt ( $ch, CURLOPT_POSTFIELDS, $fields );
-
-		$result = curl_exec ( $ch );
-		 echo $result;
-		curl_close ( $ch );
-	 
-		
-		shell_exec('curl -X POST --header "Authorization: key=AAAADy0gw_I:APA91bGBYuwoA6dF1x1bOdYjnyvKPo3IVglGq8SHBSOyOS9HaFr8L39n9P5yhksrNpO_gAgmR30Dahw4YCLMU1za84O-GHKKDJEr8zX--sE1CKr-rdbPhx_LWADCBoMymmoZqypuiaQX" --header "Content-Type: application/json" https://fcm.googleapis.com/fcm/send -d "{\"to\":\"'.$to.'\",\"priority\":\"high\",\"notification\":{\"body\": \"'.stripslashes($message).'\"}}"');
-		
-		 */
 	}
 	
 	public function match_location(Request $request) {
@@ -2087,7 +2018,6 @@ class UserApiController extends Controller
 
             $zones = Zones::orderBy('created_at' , 'desc')->get();
             $Locations = unserialize($zones[0]['coordinate']);
-         //   dd($Locations);
          $arr='';
          
             $match = $request->latitude.','.$request->longitude;
@@ -2100,10 +2030,6 @@ class UserApiController extends Controller
                    
                }
             endforeach;
-            
-            //$Data = json_encode(array_values($Locations));
-            //dd(json_decode($Data));
-        
             
             if ($find==1)
             {
@@ -2175,11 +2101,7 @@ class UserApiController extends Controller
 	public function notification(Request $request)
     {
         $id = Auth::user()->id;
-        /*$notifications = PushNotification::where('type',1)->whereRaw("find_in_set($id,to_user)")->get();
-            
-                return response()->json(['Data' =>$notifications]);*/
         try {
-            //dd(date('Y-m-d'));
             $notifications = PushNotification::where('type',1)->whereRaw("find_in_set($id,to_user)")->whereDate('expiration_date', '>=', date('Y-m-d'))->orderBy('id','desc')->get();
             return response()->json(['Data' =>$notifications]);
             

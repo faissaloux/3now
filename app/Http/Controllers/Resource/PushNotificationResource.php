@@ -38,7 +38,6 @@ class PushNotificationResource  extends Controller
      */
     public function create_old(Request $request,$zone_id='')
     {
-        //dd($request['zone_id']);
 		$users = User::orderBy('first_name' , 'asc')->get();
 		$zones = Zones::orderBy('id' , 'asc')->get();
         $providers = Provider::orderBy('first_name' , 'asc')->get();
@@ -61,9 +60,7 @@ class PushNotificationResource  extends Controller
         	        
             		if(count($dzones) > 0)
             		{
-            		    $zone_provider = Provider::where('zone_id',$dzones->id)->get();
-            		    //dd($zone_provider);
-            		    
+            		    $zone_provider = Provider::where('zone_id',$dzones->id)->get();            		    
             		} else{
             		    
             		    return redirect('admin/pushnotification/create')->with('flash_error', 'Sorry we are not serveing this area.');
@@ -88,7 +85,6 @@ class PushNotificationResource  extends Controller
      */
     public function create(Request $request,$zone_id='')
     {
-        //dd($request['zone_id']);
 		$users = User::orderBy('first_name' , 'asc')->get();
 		$zones = Zones::orderBy('id' , 'asc')->get();
         $providers = Provider::orderBy('first_name' , 'asc')->get();
@@ -121,23 +117,16 @@ class PushNotificationResource  extends Controller
                 $expected[] = $d['id'];
                 //push notification
                 if($request->all == "all" && $request->type == 1){
-                    //(new SendPushNotification)->userNotify($d['id'],$request->title,$request->notification_text,$admin);
                 }
             }
             
             $ids = implode(',',$expected);
-            //dd($ids);
            
             $provider = Provider::select('id')->get()->toArray();
             $providerNew = array();
 
             foreach($provider as $d)    {
                 $providerNew[] = $d['id'];
-                 //push notification
-                if($request->all == "all" && $request->type == 2){
-                    
-			       //(new SendPushNotification)->notifyProvider($d['id'],$request->title,$request->notification_text,$admin);
-                }
             }
             
             $providerids = implode(',',$providerNew);
@@ -150,16 +139,10 @@ class PushNotificationResource  extends Controller
             $notification->from_user = Auth::user()->id;
             
             if($request->all == 'all' && $request->type == 1)   {
-                
-                //dd($users->id);
                 $notification->all = $request->all;
                 $notification->to_user = $ids;
-                
-               
-                   
             }   elseif($request->all == 'all' && $request->type == 2)   {
                 
-                //dd($users->id);
                 $notification->all = $request->all;
                 $notification->to_user = $providerids;
                    
@@ -213,7 +196,6 @@ class PushNotificationResource  extends Controller
                 }
             }
             $ids = implode(',',$expected);
-            //dd($ids);
             if($request->has('zones')){
                 $provider = Provider::select('id')->where('zone_id',$request->zones)->get()->toArray();   
             }else{
@@ -222,13 +204,11 @@ class PushNotificationResource  extends Controller
             
             $providerNew = array();
                 if($request->all == "all" && $request->type == 2){
-                    foreach($provider as $d)    {
-                        //$providerNew[] = $d['id'];
+                    foreach($provider as $d){
                          //push notification
         			       (new SendPushNotification)->notifyProvider($d['id'],$request->title,$request->notification_text,$admin,$notification_images);
                         }
                 }
-            ////////////////////////////////////////////////
             }
             
             
@@ -237,7 +217,6 @@ class PushNotificationResource  extends Controller
         } 
 
         catch (Exception $e) {
-           //dd($e->getMessage());
             return back()->with('flash_error', 'Push Notification Not Found');
         }
 		
@@ -271,13 +250,6 @@ class PushNotificationResource  extends Controller
      */
     public function update(Request $request, $id)
     {
-	/*	$this->validate($request, [
-            'type' => 'required|not_in:-- Choose Type --',
-			'title'=>'required',
-			'notification_text'=>'required',
-			'image'=>'mimes:jpeg,jpg,bmp,png|max:5242880',
-			'expiration_date'=>'required'
-        ]);*/
 
         try{
             
@@ -293,7 +265,7 @@ class PushNotificationResource  extends Controller
             $notification->expiration_date = Carbon::parse($request->expiration_date);
             if($request->hasFile('image')) {
                 
-                $notification['image'] = $request->image->store('user/profile');
+            $notification['image'] = $request->image->store('user/profile');
             }
             $savedNotification = $notification->save();
 
@@ -328,13 +300,10 @@ class PushNotificationResource  extends Controller
     }
     
     
-    public function getLatlngZone_id( $point,$zone_id) {
-		//$id = 0;
-		
+    public function getLatlngZone_id( $point,$zone_id) {		
 		$zone = Zones::where('id',$zone_id)->first(); 
 	
-		/*if( count( $zones ) ) {
-			foreach( $zones as $zone ) {*/
+
 				if( $zone['coordinate'] ) {
 					$coordinate = unserialize( $zone->coordinate );
 					$polygon = [];
@@ -347,21 +316,15 @@ class PushNotificationResource  extends Controller
 						return $zone->id;
 					}
 				}
-			/*}
-		}	*/	
-		//return $id;	
+
 	}
 	public function getZoneId()
     {
-        $id = $_GET['zone_id'];
-        //dd($id);
-        
+        $id = $_GET['zone_id'];        
     }
     
     public function getZonesProviders($id,$type){
             //for provider (driver)
-              
-           
             if($type==2){
                     $zone_provider = Provider::where('zone_id',$id)->get();
                     if(count($zone_provider)>0){
@@ -369,35 +332,6 @@ class PushNotificationResource  extends Controller
                     }else{
                        return 'No Driver Found'; 
                     }
-                  
-        //         $user_request = UserRequests::all()->last();
-        //         $spoint[0]	=	$user_request->s_latitude;
-        // 		$spoint[1]	=	$user_request->s_longitude;
-        // 		$dpoint[0]	=	$user_request->d_latitude; 
-        // 		$dpoint[1]	=	$user_request->d_longitude;
-        		
-        // 		$szone_id	=	$this->getLatlngZone_id($spoint,$id);
-        		
-        // 		$dzone_id	=	$this->getLatlngZone_id($dpoint,$id);
-        	
-        //         $szones = Zones::select('status')->where('id',$szone_id)->where('status','active')->first();
-        //         if(count($szones) > 0 )
-        //     	{
-            	  
-        //     	        $dzones = Zones::select('status','id')->where('id',$dzone_id)->where('status','active')->first();
-            	       
-        //         		if(count($dzones) > 0)
-        //         		{
-        //         		    $zone_provider = Provider::where('zone_id',$dzones->id)->get();
-                		
-        //         		    return view('admin.pushnotification.zoneprovider',compact('zone_provider'));
-        //         		}else{
-        //         		    return 'No Driver Found';
-        //         		}
-            // 	}else{ 
-            //	   return 'No Driver Found';
-            	    
-             //	}
             }else{
                 
                 $zone_user = User::where('zone_id',$id)->get();
@@ -408,36 +342,6 @@ class PushNotificationResource  extends Controller
                 		}else{
                 		    return 'No User Found';
                 		}
-                // for user
-                     /*$user_request = UserRequests::all()->last();
-                
-                $spoint[0]	=	$user_request->s_latitude;
-        		$spoint[1]	=	$user_request->s_longitude;
-        		$dpoint[0]	=	$user_request->d_latitude; 
-        		$dpoint[1]	=	$user_request->d_longitude;
-        		
-        		$szone_id	=	$this->getLatlngZone_id($spoint,$id);
-        		
-        		$dzone_id	=	$this->getLatlngZone_id($dpoint,$id);
-        	
-                $szones = Zones::select('status')->where('id',$szone_id)->where('status','active')->first();
-                if(count($szones) > 0 )
-            	{
-            	  
-            	        $dzones = Zones::select('status','id')->where('id',$dzone_id)->where('status','active')->first();
-            	       
-                		if(count($dzones) > 0)
-                		{
-                		    $zone_user = User::where('zone_id',$dzones->id)->get();
-                		
-                		    return view('admin.pushnotification.zoneuser',compact('zone_user'));
-                		}else{
-                		    return 'No User Found';
-                		}
-            	}else{ 
-            	   return 'No User Found';
-            	    
-            	}*/
             }
     }
     
