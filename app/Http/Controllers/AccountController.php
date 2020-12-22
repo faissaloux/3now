@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Helpers\Helper;
-
 use Auth;
-use Setting;
 use Exception;
 use \Carbon\Carbon;
 
