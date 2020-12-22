@@ -198,17 +198,6 @@ class CouponHelper {
 
 		$this->request_discount = $this->calculate_coupon();
 		
-		\Log::info('the coupon calculated is' . $this->request_discount  );
-
-
-
-		// if($this->request_discount < $this->maxDiscount ){
-
-
-		// 	\Log::info('rah kber min 20 ');
-		// 	$this->request_discount = $this->request_discount ;
-		// }
-		
 		unset($request,$request_id);
 
 		return $this;

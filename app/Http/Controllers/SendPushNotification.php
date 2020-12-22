@@ -291,9 +291,6 @@ class SendPushNotification extends Controller
             */
 
     	}   catch(Exception $e){
-
-
-           // \Log::info($e)
     		return $e;
     	}
     }

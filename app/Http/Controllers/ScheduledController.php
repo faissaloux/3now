@@ -1004,9 +1004,6 @@ public function send_schedule_payment(Request $request){
             'use_wallet'   => 'numeric',
             'payment_mode' => 'required',
         ]);
-
-        Log::info('New Request from User: '.Auth::user()->id);
-        Log::info('Request Details:', $request->all());
         
         $spoint[0]  =   $request->s_latitude; 
         $spoint[1]  =   $request->s_longitude;
@@ -1165,7 +1162,6 @@ public function send_schedule_payment(Request $request){
                             });
                             */
 
-                            Log::info('New Request id : '. $UserRequest->id .' Assigned to provider : '. $UserRequest->current_provider_id);
                 
                             // update payment mode
                 
@@ -1580,9 +1576,6 @@ public function send_schedule_payment(Request $request){
             'payment_mode' => 'required|in:CASH,CARD,PAYPAL',
             'card_id' => ['required_if:payment_mode,CARD','exists:cards,card_id,user_id,'.Auth::user()->id],
         ]);
-
-        Log::info('New Request from User: '.Auth::user()->id);
-        Log::info('Request Details:', $request->all());
         
 
         $spoint[0]	=	$request->s_latitude; 
@@ -1731,7 +1724,6 @@ public function send_schedule_payment(Request $request){
                             });
                             */
                             
-                            Log::info('New Request id : '. $UserRequest->id .' Assigned to provider : '. $UserRequest->current_provider_id);
                 
                             // update payment mode
                 
@@ -1867,9 +1859,6 @@ public function send_schedule_payment(Request $request){
             'payment_mode' => 'required|in:CASH,CARD,PAYPAL',
             'card_id' => ['required_if:payment_mode,CARD','exists:cards,card_id,user_id,'.Auth::user()->id],
         ]);
-
-        Log::info('New Request from User: '.Auth::user()->id);
-        Log::info('Request Details:', $request->all());
         
 
         $spoint[0]	=	$request->s_latitude; 
@@ -2015,7 +2004,6 @@ public function send_schedule_payment(Request $request){
                             });
                             */
                             
-                            Log::info('New Request id : '. $UserRequest->id .' Assigned to provider : '. $UserRequest->current_provider_id);
                 
                             // update payment mode
                 
@@ -2900,8 +2888,6 @@ public function send_schedule_payment(Request $request){
      */
 
     public function estimated_fare(Request $request) {
-        
-        \Log::info('Estimate', $request->all());
         $this->validate($request,[
             's_latitude' => 'required|numeric',
             's_longitude' => 'required|numeric',

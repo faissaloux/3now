@@ -70,12 +70,6 @@ class TripController extends Controller
      */
     public function index(Request $request)
     {
-
-
-    //    \Log::info('started');
-
-
-
         try{
             if($request->ajax()) {
                 $Provider = Auth::user();
@@ -287,10 +281,6 @@ class TripController extends Controller
             $UserRequest->total = 0 ;
             $UserRequest->save();
 
-            
-            
-            \Log::info('ride canceled by '. Auth::user()->id);
-
             RequestFilter::where('request_id', $UserRequest->id)->delete();
 
             ProviderService::where('provider_id',$UserRequest->provider_id)->update(['status' =>'active']);
@@ -479,9 +469,6 @@ class TripController extends Controller
      */
     public function accept(Request $request, $id)
     {
-
-
-        \Log::info('just accepted the request and request id is : '.$id);
 
         try {
 
@@ -730,7 +717,6 @@ class TripController extends Controller
             ];
             \DB::table('canceled_rides')->insert($data);
 
-            \Log::info('rejected the ride by : '. Auth::user()->id . ' ' . Auth::user()->first_name .' and request Id is ' . $UserRequest->id);
 
 
         try {
@@ -756,9 +742,6 @@ class TripController extends Controller
 
             //  request push to user provider not available
             (new SendPushNotification)->ProviderNotAvailable($UserRequest->user_id);*/
-
-            \Log::info('didnt find any provider');
-            \Log::info('error is '.$e->getMessage());
 
             $this->assign_next_provider($UserRequest->id);
         }
@@ -1081,9 +1064,6 @@ class TripController extends Controller
     }
     	//Get Chat
 	public function getChat(Request $request){
-
-
-        \Log::info('this function');
 
 		$this->validate($request, [
 				'request_id' => 'required',              

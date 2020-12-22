@@ -63,9 +63,6 @@ class ScheduledRequests extends Command
 
 
                \DB::table('request_filters')->insert($data);
-
-
-               \Log::info("Cron is done it's job :) hamdollah !");
             }
         
         

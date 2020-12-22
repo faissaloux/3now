@@ -46,9 +46,7 @@ class CustomCommand extends Command
 
         $hour =  \Carbon\Carbon::now()->subHour();
         $futurehours = \Carbon\Carbon::now()->addMinutes(5);
-        $date =  \Carbon\Carbon::now();           
-
-        \Log::info("Schedule Service Request Started.".$date."==".$hour."==".$futurehours);
+        $date =  \Carbon\Carbon::now();
 
         if(!empty($UserRequest)){
             foreach($UserRequest as $ride){

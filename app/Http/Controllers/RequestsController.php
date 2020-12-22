@@ -231,9 +231,6 @@ class RequestsController extends Controller  {
 						foreach ($Providers as $key => $Provider) {
 
                             if($x == 0) {
-                                \Log::info('current provider device_token is '.$Provider->device_token);
-                                \Log::info('current provider android_token is '.$Provider->android_token);
-                                \Log::info('current provider is '.$Provider->first_name . ' and his ID is :'.$Provider->id);
                                 $this->send_notification($Provider->android_token,'New Request','You Recieved New Notification');
                             }
 							$Filter = new RequestFilter;
