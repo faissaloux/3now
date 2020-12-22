@@ -127,7 +127,6 @@ Route::group(['prefix' => 'provider'], function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/searchingajax', 'CommonController@searchingajax');
-    Route::get ('/ajaxforofflineprovider' , 'CommonController@ajaxforofflineprovider');
     Route::get ('/offnotificationtoprovider' , 'SendPushNotification@offnotificationtoprovider');
     
     Route::get ('/provider-document-expiry-notification' , 'CommonController@providerDocumentExpiryNotification');

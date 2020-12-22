@@ -9,8 +9,6 @@
 Route::get('/', 'AdminController@dashboard')->name('index');
 Route::get('/notification', 'AdminController@notification')->name('notification');
 Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
-// Route::get('/searchingajax', 'AdminController@searchingajax');
-// Route::get ('/ajaxforofflineprovider' , 'AdminController@ajaxforofflineprovider');
 
 Route::get('/airport', 'AdminController@airport')->name('airport');
 Route::get('/delivery', 'AdminController@delivery')->name('delivery');
@@ -189,4 +187,3 @@ Route::post('push', 'AdminController@push_store')->name('push.store');
 
 Route::get('get-locations/{type?}', 'LiveTrip@index')->name('live.index');
 Route::get('get-details/{type}/{id}', 'LiveTrip@getDetails')->name('live.details');
-

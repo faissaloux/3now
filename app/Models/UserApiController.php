@@ -66,36 +66,6 @@ class UserApiController extends Controller
 
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     * 
-     */
-	 
-
-
-        public function calculatePrice() {
-   
-   /*         
-        $this->validate( $request, [
-            's_latitude'   => 'required|numeric',
-            'd_latitude'   => 'required|numeric',
-            's_longitude'  => 'required|numeric',
-            'd_longitude'  => 'required|numeric',
-            'service_type' => 'required|numeric|exists:service_types,id',
-            'promo_code'   => 'exists:promocodes,promo_code',
-            'distance'     => 'required|numeric',
-            'use_wallet'   => 'numeric',
-            'payment_mode' => 'required',
-        ]);
-
-*/
-         return response()->json(['price' => 112]);
-
-
-        }
-
 
 
 
@@ -113,9 +83,6 @@ class UserApiController extends Controller
             'payment_mode' => 'required',
         ]);
 
-        Log::info('New Request from User: '.Auth::user()->id);
-        Log::info('Request Details:', $request->all());
-        
         $spoint[0]  =   $request->s_latitude; 
         $spoint[1]  =   $request->s_longitude;
         $dpoint[0]  =   $request->d_latitude; 
@@ -262,7 +229,6 @@ class UserApiController extends Controller
                                 'drivermobile'  => $Providers[0]->mobile
                             );
 
-                            Log::info('New Request id : '. $UserRequest->id .' Assigned to provider : '. $UserRequest->current_provider_id);
                 
                             // update payment mode
                 
@@ -907,12 +873,8 @@ class UserApiController extends Controller
             'distance' => 'required|numeric',
             'use_wallet' => 'numeric',
             'payment_mode' => 'required|in:CASH,CARD,PAYPAL',
-            //'card_id' => ['required_if:payment_mode,CARD','exists:cards,card_id,user_id,'.Auth::user()->id],
         ]);
 
-        Log::info('New Request from User: '.Auth::user()->id);
-        Log::info('Request Details:', $request->all());
-        
 
         $spoint[0]	=	$request->s_latitude; 
 		$spoint[1]	=	$request->s_longitude;
@@ -1045,15 +1007,7 @@ class UserApiController extends Controller
                                 'drivermobile'  => $Providers[0]->mobile
                             );
                 
-                            /*
-                             //Send New Request Email to Admin
-                            Mail::send('emails.new_request_notification', [ 'data' => $data ] , function($message) use ($data) {
-                                $message->to( config('mail.admin.address') )->subject('New Request Accepted By Driver | Wedrive ');
-                                $message->from( config('mail.from.address' ) , config('mail.from.name') );
-                            });
-                            */
                             
-                            Log::info('New Request id : '. $UserRequest->id .' Assigned to provider : '. $UserRequest->current_provider_id);
                 
                             // update payment mode
                 
@@ -1416,7 +1370,6 @@ class UserApiController extends Controller
 
     public function estimated_fare(Request $request) {
         
-        \Log::info('Estimate', $request->all());
         $this->validate($request,[
             's_latitude' => 'required|numeric',
             's_longitude' => 'required|numeric',
