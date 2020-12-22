@@ -2,20 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Helpers\Helper;
-
-use Auth;
-use Setting;
-use Exception;
-use \Carbon\Carbon;
-
-use App\User;
-use App\UserLocationType;
-use App\Provider;
-use App\ServiceType;
-use App\UserRequests;
+use App\Models\{User,UserLocationType,Provider,UserRequests};
 
 class LiveTrip extends Controller
 {

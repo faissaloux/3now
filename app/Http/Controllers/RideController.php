@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use Auth;
-use Setting;
-use App\Card;
+use App\Models\{User,Card};
 
 class RideController extends Controller
 {

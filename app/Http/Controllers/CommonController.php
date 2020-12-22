@@ -4,22 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
-use App\ServiceType;
-use App\Provider;
-use App\ProviderDocument;
-use App\ProviderProfile;
-use App\PushNotification;
+use App\Models\{ServiceType,Provider,ProviderDocument,PushNotification,Page,ContactUs,Complaint,Blog,LostItem,User};
+
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\SendPushNotification;
-use App\ProviderService;
 use \Carbon\Carbon;
 use DateTime;
-use App\Page;
-use App\ContactUs;
-use App\Complaint;
-use App\Blog;
-use App\LostItem;
-use App\User;
 class CommonController extends Controller
 {
     

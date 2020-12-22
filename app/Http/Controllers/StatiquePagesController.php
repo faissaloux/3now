@@ -2,27 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Log;
-use Setting;
-use Auth;
-use Exception;
-use Carbon\Carbon;
-use App\Helpers\Helper;
-use Session;
-
-use App\User;
-use App\Zones;
-use App\SupportUser;
-use App\Provider;
-use App\UserRequests;
-use App\RequestFilter;
-use App\ProviderService;
-use App\ServiceType;
-use App\CorporateAccount;
-use App\Complaint;
-
 
 class StatiquePagesController extends Controller
 {
@@ -135,8 +114,10 @@ function get_server_cpu_usage(){
 
 
   ?>
-<p><span class="description">Server Memory Usage:</span> <span class="result"><?php echo  $this->get_server_memory_usage(); ?>%</span></p>
-<p><span class="description">Server CPU Usage: </span> <span class="result"><?php echo  $this->get_server_cpu_usage(); ?> %</span></p>
+<p><span class="description">Server Memory Usage:</span> <span
+        class="result"><?php echo  $this->get_server_memory_usage(); ?>%</span></p>
+<p><span class="description">Server CPU Usage: </span> <span
+        class="result"><?php echo  $this->get_server_cpu_usage(); ?> %</span></p>
 <?php
   }
 

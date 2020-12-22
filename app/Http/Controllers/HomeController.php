@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\UserRequests;
-use App\User;
 use Auth;
-use App\AdminHelps;
-use App\AdminTerms;
-use App\AdminFaq;
-use App\Card;
+use App\Models\{AdminHelps,AdminTerms,AdminFaq,Card};
 
 class HomeController extends Controller
 {

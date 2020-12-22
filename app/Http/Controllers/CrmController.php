@@ -4,27 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Log;
 use Setting;
 use Auth;
 use Exception;
 use Carbon\Carbon;
-use App\Helpers\Helper;
-use Session;
 
-use App\User;
-use App\Zones;
-use App\CrmUser;
-use App\Provider;
-use App\UserRequests;
-use App\RequestFilter;
-use App\ProviderService;
-use App\ServiceType;
-use App\CorporateAccount;
-use App\ContactUs;
-use App\Complaint;
-use App\LostItem;
-use App\UserRequestPayment;
+use App\Models\{User,CrmUser,Provider,UserRequests,ServiceType,ContactUs,Complaint,LostItem,UserRequestPayment};
 
 
 

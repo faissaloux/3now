@@ -12,11 +12,7 @@ use Stripe\StripeInvalidRequestError;
 use Auth;
 use Setting;
 use Exception;
-use App\BankAccount;
-use App\Card;
-use App\User;
-use App\UserRequests;
-use App\UserRequestPayment;
+use App\Models\{BankAccount,Card,User,UserRequests,UserRequestPayment};
 //paypal 
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
@@ -25,7 +21,6 @@ use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
-use PayPal\Api\PaymentExecution;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
@@ -33,7 +28,6 @@ use PayPal\Rest\ApiContext;
 use Redirect;
 use Session;
 use URL;
-use Log;
 
 class PaymentController extends Controller
 {

@@ -11,16 +11,7 @@ use Setting;
 use Exception;
 use \Carbon\Carbon;
 
-use App\User;
-use App\Fleet;
-use App\Account;
-use App\Provider;
-use App\UserPayment;
-use App\ServiceType;
-use App\UserRequests;
-use App\ProviderService;
-use App\UserRequestRating;
-use App\UserRequestPayment;
+use App\Models\{Fleet,Account,Provider,ServiceType,UserRequests,UserRequestPayment};
 
 class AccountController extends Controller
 {

@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\User;
-use App\ProviderDevice;
+
 use Exception;
-use App\PushNotification;
-use App\ProviderService;
+use App\Models\{User,ProviderDevice,PushNotification,ProviderService};
 
 class SendPushNotification extends Controller
 {

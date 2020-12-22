@@ -12,16 +12,7 @@ use Carbon\Carbon;
 use App\Helpers\Helper;
 use Session;
 
-use App\User;
-use App\Zones;
-use App\Dispatcher;
-use App\Provider;
-use App\UserRequests;
-use App\RequestFilter;
-use App\ProviderService;
-use App\ServiceType;
-use App\CorporateAccount;
-use App\Complaint;
+use App\Models\{User,Zones,Dispatcher,Provider,UserRequests,RequestFilter,ProviderService,ServiceType,CorporateAccount,Complaint};
 
 
 class DispatcherController extends Controller

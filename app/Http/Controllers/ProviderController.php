@@ -4,15 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\UserRequests;
-use App\RequestFilter;
-use App\Provider;
 use Carbon\Carbon;
 use App\Http\Controllers\ProviderResources\TripController;
-use App\AdminHelps;
-use App\AdminTerms;
-use App\AdminFaq;
-use App\ProviderService;
 use Illuminate\Support\Facades\DB;
+use App\Models\{Provider,AdminHelps,AdminTerms,AdminFaq};
+
 class ProviderController extends Controller
 {
     /**

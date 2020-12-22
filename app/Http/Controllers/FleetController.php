@@ -9,16 +9,7 @@ use App\Helpers\Helper;
 use Auth;
 use Setting;
 use Exception;
-
-use App\User;
-use App\Fleet;
-use App\Provider;
-use App\UserPayment;
-use App\ServiceType;
-use App\UserRequests;
-use App\ProviderService;
-use App\UserRequestRating;
-use App\UserRequestPayment;
+use App\Models\{User,Fleet,Provider,ServiceType,UserRequests,ProviderService,UserRequestRating,UserRequestPayment};
 
 class FleetController extends Controller
 {

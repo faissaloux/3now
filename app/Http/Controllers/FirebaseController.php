@@ -5,14 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
-use App\Http\Controllers\SendPushNotification;
 use App\Chat;
-use App\SecurityCheckList;
-use Auth;
-use App\User;
-use App\UserRequests;
-use App\Provider;
-use DB;
+
+use App\Models\{User,Provider};
 class FirebaseController extends Controller
 {
     public function msg()

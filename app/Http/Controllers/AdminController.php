@@ -5,27 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Helpers\Helper;
-use DateTime;
+use App\Models\{User,Admin,Provider,ServiceType,UserRequests,ProviderService,UserRequestRating,UserRequestPayment,Package,FareSetting,PeakAndNight,ContactUs,Zones};
 use Auth;
 use Setting;
 use Exception;
 use \Carbon\Carbon;
 use DB;
-use App\User;
-use App\Fleet;
-use App\Admin;
-use App\Provider;
-use App\UserPayment;
-use App\ServiceType;
-use App\UserRequests;
-use App\ProviderService;
-use App\UserRequestRating;
-use App\UserRequestPayment;
-use App\Package;
-use App\FareSetting;
-use App\PeakAndNight;
-use App\ContactUs;
-use App\Zones;
 
 
 
@@ -34,9 +19,6 @@ if (version_compare(PHP_VERSION, '7.2.0', '>=')) {
     error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
     // error_reporting(E_ALL ^ E_WARNING); // Maybe this is enough
 }
-
-
-
 
 
 

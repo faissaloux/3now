@@ -10,10 +10,7 @@ use App\Promocode;
 use App\PromocodeUsage;
 use Auth;
 
-use App\ProviderService;
-use App\Provider;
-use App\Settings;
-use App\ServiceType;
+use App\Models\{ProviderService,Provider,ServiceType};
 
 class AjaxHandlerController extends Controller
 {

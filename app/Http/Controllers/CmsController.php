@@ -4,24 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Log;
 use Setting;
 use Auth;
 use Exception;
-use Carbon\Carbon;
-use App\Helpers\Helper;
-use Session;
-
-use App\User;
-use App\Zones;
-use App\CmsUser;
-use App\Provider;
-use App\UserRequests;
-use App\RequestFilter;
-use App\ProviderService;
-use App\ServiceType;
-use App\Blog;
-use App\Page;
+use App\Models\{CmsUser,ServiceType,Blog,Page};
  
 
 

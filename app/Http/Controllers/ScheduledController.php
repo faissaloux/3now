@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Chatroom;
 use DB;
 use Log;
 use Auth;
@@ -12,53 +11,28 @@ use Hash;
 use Storage;
 use Setting;
 use Exception;
-use Notification;
 use Mail; 
-use App\Chat;
 use Carbon\Carbon;
 use App\Http\Controllers\SendPushNotification;
-use App\Notifications\ResetPasswordOTP;
 use App\Helpers\Helper;
-use App\PushNotification;
-use App\Card;
-use App\Zones;
-use App\User;
-use App\Provider;
-use App\Settings;
-use App\Promocode;
-use App\ServiceType;
-use App\UserRequests;
-use App\RequestFilter;
-use App\PromocodeUsage;
-use App\ProviderService;
-use App\UserRequestRating;
 use App\Http\Controllers\ProviderResources\TripController;
-use App\UserLocationType;
-use App\UserComplaint;
-use App\FareSetting;
-use App\PeakAndNight;
-use App\UserRequestPayment;
 use Stripe\Charge;
 use Stripe\Stripe;
-use Stripe\StripeInvalidRequestError;
-use App\WebRequests;
 
+use App\Models\{Chat,PushNotification,Card,Zones,User,Provider,Promocode,ServiceType,UserRequests,RequestFilter,PromocodeUsage,ProviderService,UserRequestRating,UserLocationType,UserComplaint,FareSetting,PeakAndNight,UserRequestPayment,WebRequests};
 
 //paypal 
 use PayPal\Api\Amount;
-use PayPal\Api\Details;
 use PayPal\Api\Item;
 /** All Paypal Details class **/
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
-use PayPal\Api\PaymentExecution;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 use Redirect;
-use Session;
 use URL;
 
 
