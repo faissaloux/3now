@@ -70,12 +70,6 @@ class TripController extends Controller
      */
     public function index(Request $request)
     {
-
-
-    //    \Log::info('started');
-
-
-
         try{
             if($request->ajax()) {
                 $Provider = Auth::user();
@@ -113,33 +107,8 @@ class TripController extends Controller
             $commission = UserRequestPayment::whereIn('request_id', $totalride)->sum('commision');
             $earnings = $totalEarning-$commission;
             $earnings = number_format($earnings, 2);
-            //$earnings = $rev->revenue;
-            //$commision = $rev->revenue;
-
-//$is_empty = !empty($request->latitude) ? ' latitude not empty ' : 'latitude empty';
-/*
-                        \Log::info('latitude :'.$request->latitude);
-                        \Log::info('longitude :'.$request->longitude);
-                        \Log::info('user_id :'. Auth::user()->id.' , '. $is_empty);
-
-                $data = [
-                    'lat' => $request->latitude,
-                    'lon' => $request->longitude,
-                    'user_id' => Auth::user()->id,
-                ];
-*/
-                   // \DB::table('test_addresses')->insert($data);
 
             if(!empty($request->latitude)) {
-
-                    /*
-                
-
-                \Log::inf($data);
-
-                \DB::table('test_addresses')->insert($data);
-        */
-
 
                 $point[0] = $request->latitude;
                 $point[1] = $request->longitude;
@@ -286,10 +255,6 @@ class TripController extends Controller
             $UserRequest->cancelled_by = "PROVIDER";
             $UserRequest->total = 0 ;
             $UserRequest->save();
-
-            
-            
-            \Log::info('ride canceled by '. Auth::user()->id);
 
             RequestFilter::where('request_id', $UserRequest->id)->delete();
 
@@ -480,9 +445,6 @@ class TripController extends Controller
     public function accept(Request $request, $id)
     {
 
-
-        \Log::info('just accepted the request and request id is : '.$id);
-
         try {
 
             $UserRequest = UserRequests::findOrFail($id);
@@ -658,17 +620,7 @@ class TripController extends Controller
                     catch(Exception $ex){
                         echo $ex->getMessage();
                     }
-
-                             
-                    //Log::info($ex->getMessage());
-                    
-                
-
-
-				
 			}
-
-       
             return $UserRequest;
 
         } catch (ModelNotFoundException $e) {
@@ -730,7 +682,6 @@ class TripController extends Controller
             ];
             \DB::table('canceled_rides')->insert($data);
 
-            \Log::info('rejected the ride by : '. Auth::user()->id . ' ' . Auth::user()->first_name .' and request Id is ' . $UserRequest->id);
 
 
         try {
@@ -756,9 +707,6 @@ class TripController extends Controller
 
             //  request push to user provider not available
             (new SendPushNotification)->ProviderNotAvailable($UserRequest->user_id);*/
-
-            \Log::info('didnt find any provider');
-            \Log::info('error is '.$e->getMessage());
 
             $this->assign_next_provider($UserRequest->id);
         }
@@ -1081,9 +1029,6 @@ class TripController extends Controller
     }
     	//Get Chat
 	public function getChat(Request $request){
-
-
-        \Log::info('this function');
 
 		$this->validate($request, [
 				'request_id' => 'required',              

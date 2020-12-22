@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Log;
 use Setting;
 use Auth;
 use Exception;
@@ -151,10 +150,6 @@ class DispatcherController extends Controller
 			
 			$Request->save();
 			
-			
-			Log::useFiles(storage_path().'/logs/dispatcher.log');
-			Log::info( $Request->booking_id.' id is assigned to co-partner by dispatcher panel!');
-			
 			$json['trip'] = $Request;
 			return response()->json($json);
 		
@@ -261,9 +256,6 @@ class DispatcherController extends Controller
 				$UserRequest->special_note 	=	$request->special_note;
 				$UserRequest->save();
 				$json['status'] = true;
-				
-				Log::useFiles(storage_path().'/logs/dispatcher.log');
-				Log::info( $UserRequest->booking_id.' id updated by dispatcher panel');
 			
 			}
 		
@@ -443,11 +435,7 @@ class DispatcherController extends Controller
 				$Request->assigned_at 			=	Carbon::now();
 				$Request->cancel_reason			=	$request->cancel_reason;
 				$Request->current_provider_id 	=	$Provider->id;
-				$Request->save();	
-				
-				
-				Log::useFiles(storage_path().'/logs/dispatcher.log');
-				Log::info( $Request->booking_id.' manually assigned to driver!' );
+				$Request->save();
 				
 				
 			} else if( $request->cancel_status == 'reassign' ) {
@@ -486,9 +474,6 @@ class DispatcherController extends Controller
 				$Request = $UserRequest;
 			
 				DB::table('user_requests')->where('id', $old_request->id )->delete();
-				
-				Log::useFiles(storage_path().'/logs/dispatcher.log');
-				Log::info( $UserRequest->booking_id.' re-assign to  new driver!' );
 			
 			}
 			
@@ -769,9 +754,6 @@ class DispatcherController extends Controller
 			}
 			
 			$UserRequest->save();
-			
-			Log::useFiles(storage_path().'/logs/dispatcher.log');
-			Log::info('New Request Created by dispatcher : ' . $UserRequest->booking_id);
 		
 			
 			if( $UserRequest->current_provider_id ) {

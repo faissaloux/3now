@@ -270,8 +270,6 @@ class SendPushNotification extends Controller
            
 
     	}   catch(Exception $e){
-
-
     		return $e;
     	}
     }

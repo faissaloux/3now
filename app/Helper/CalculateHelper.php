@@ -3,7 +3,6 @@
 
 namespace App\Helper;
 use Setting;
-use Log;
 
 	/*
 	*	this Helper made to solve all the distance problemes 

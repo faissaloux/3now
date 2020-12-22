@@ -109,10 +109,6 @@ class TokenController extends Controller
 
     public function authenticate(Request $request)
     {
-
-
-
-        \Log::info('this is loggin');
         $this->validate($request, [
                 'device_id' => 'required',
                 'device_type' => 'required|in:android,ios',

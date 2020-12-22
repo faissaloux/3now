@@ -285,7 +285,6 @@ class ProfileController extends Controller
         
 
              $status = $request->service_status;
-        \Log::info('the provider ' . Auth::user()->first_name . ' ' . Auth::user()->last_name . ' changed statue to :'. $status);
 
 
 

@@ -32,7 +32,6 @@ class ScheduledRequests extends Command
 
     /**
      * Execute the console command.
-     *        \Log::info("Cron is working fine!");
 
      * @return mixed
      */
@@ -63,9 +62,6 @@ class ScheduledRequests extends Command
 
 
                \DB::table('request_filters')->insert($data);
-
-
-               \Log::info("Cron is done it's job :) hamdollah !");
             }
         
         

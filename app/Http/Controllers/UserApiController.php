@@ -79,8 +79,6 @@ class UserApiController extends Controller {
                 $UserRequest->save();
                 $data['error'] = '';
                 $data['success'] = 'saved successfully';
-
-                \Log::info('tips worked');
             }
 
             return response()->json($data);
