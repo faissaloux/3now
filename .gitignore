@@ -1,4 +1,3 @@
-
 ### Laravel ###
 vendor/
 node_modules/
@@ -6,7 +5,7 @@ npm-debug.log
 
 # Laravel 4 specific
 bootstrap/compiled.php
-
+storage/framework/views/*
 
 # Laravel 5 & Lumen specific
 
