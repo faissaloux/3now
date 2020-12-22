@@ -18,7 +18,7 @@ Artisan::command('inspire', function () {
 })->describe('Display an inspiring quote');
 
 Artisan::command('make:admin', function () {
-    \App\Admin::create([
+    \App\Models\Admin::create([
         'name'  => 'Admin',
         'email' => 'admin@3now.com',
         'password' => \Hash::make('1234')

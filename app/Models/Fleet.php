@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Notifications\FleetResetPassword;
 use Illuminate\Notifications\Notifiable;
