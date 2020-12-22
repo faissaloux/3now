@@ -337,9 +337,6 @@ public function allocation_list()
      */
     public function settings_store(Request $request)
     {
-        // if(Setting::get('demo_mode', 0) == 1) {
-        //     return back()->with('flash_error','Disabled for demo purposes! Please contact us at info@appoets.com');
-        // }
 
         $this->validate($request,[
                 'site_title' => 'required',
@@ -414,9 +411,6 @@ public function allocation_list()
      */
     public function settings_payment_store(Request $request)
     {
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error', '');
-        }
 
         $this->validate($request, [
                 'CARD' => 'in:on',
@@ -471,9 +465,6 @@ public function allocation_list()
      */
     public function profile_update(Request $request)
     {
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error', 'Disabled for demo purposes! Please contact us at info@appoets.com');
-        }
 
         $this->validate($request,[
             'name' => 'required|max:255',
@@ -518,9 +509,6 @@ public function allocation_list()
      */
     public function password_update(Request $request)
     {
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error','Disabled for demo purposes! Please contact us at info@appoets.com');
-        }
 
         $this->validate($request,[
             'old_password' => 'required',
@@ -845,9 +833,6 @@ public function allocation_list()
     
     public function changeprovidorpassword(Request $request)
     {
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error','Disabled for demo purposes! Please contact us at info@appoets.com');
-        }
 
         $this->validate($request,[
             'password' => 'required|min:6|confirmed',
@@ -876,9 +861,6 @@ public function allocation_list()
     
     public function changeuserpassword(Request $request)
     {
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error','Disabled for demo purposes! Please contact us at info@appoets.com');
-        }
 
         $this->validate($request,[
             'password' => 'required|min:6|confirmed',
@@ -1129,9 +1111,6 @@ public function allocation_list()
     }
 
     public function service_update(Request $request, $id){
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error','Disabled for demo purposes! Please contact us at info@appoets.com');
-        }
          $this->validate($request, [
             'name' => 'required|max:255',
             'capacity' => 'required|numeric',

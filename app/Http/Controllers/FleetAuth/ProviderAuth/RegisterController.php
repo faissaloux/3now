@@ -54,7 +54,6 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'first_name' => 'required|max:255',
-            // 'last_name' => 'required|max:255',
             'phone_number' => 'required',
             'email' => 'required|email|max:255|unique:providers',
             'password' => 'required|min:6|confirmed',
@@ -73,25 +72,17 @@ class RegisterController extends Controller
     {
         $Provider = Provider::create([
             'first_name' => $data['first_name'],
-            // 'last_name' => $data['last_name'],
             'email' => $data['email'],
             'mobile' => $data['phone_number'],
             'password' => bcrypt($data['password']),
         ]);
 
-        $provider_service = ProviderService::create([
+        ProviderService::create([
             'provider_id' => $Provider->id,
             'service_type_id' => $data['service_type'],
             'service_number' => $data['service_number'],
             'service_model' => ( $data['service_model']) ? $data['service_model'] : '',
         ]);
-
-        if(Setting::get('demo_mode', 0) == 1) {
-            $Provider->update(['status' => 'approved']);
-            $provider_service->update([
-                'status' => 'active',
-            ]);
-        }
         
         return $Provider;
     }

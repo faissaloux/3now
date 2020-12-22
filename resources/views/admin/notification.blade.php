@@ -8,9 +8,6 @@
         <div class="box box-block bg-white">
             <h5 class="mb-1">
                 Notification
-                <!--@if(Setting::get('demo_mode', 0) == 1)
-                <span class="pull-right">(*personal information hidden in demo)</span>
-                @endif-->
             </h5>
             <table class="table table-striped table-bordered dataTable" id="table-2" style="width:100%;">
                 <thead>

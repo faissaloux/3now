@@ -34,9 +34,6 @@
         <div class="box box-block bg-white">
             <h5 class="mb-1">
                <i class="ti-basketball"></i>&nbsp; Treiber
-                @if(Setting::get('demo_mode', 0) == 1)
-                <span class="pull-right">(*personal information hidden in demo)</span>
-                @endif
             </h5><hr>
             <a href="{{ route('crm.provider.create') }}" style="margin-left: 1em;" class="btn btn-success shadow-box btn-rounded pull-right"><i class="fa fa-plus"></i> Neuen Treiber hinzufügen</a>
             <table class="table table-striped table-bordered dataTable" id="table-2" style="width:100%;">
@@ -46,9 +43,6 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Mobiltelefon</th>
-                        <!-- <th>Total Ride</th>
-                        <th>Accepted Ride</th>
-                        <th>Cancelled Ride</th> -->
                         <th>Unterlagen</th>
                         <th>Online</th>
                         <th>Aktion</th>
@@ -59,19 +53,8 @@
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $provider->first_name }} {{ $provider->last_name }}</td>
-                        @if(Setting::get('demo_mode', 0) == 1)
-                        <td>{{ substr($provider->email, 0, 3).'****'.substr($provider->email, strpos($provider->email, "@")) }}</td>
-                        @else
                         <td>{{ $provider->email }}</td>
-                        @endif
-                        @if(Setting::get('demo_mode', 0) == 1)
-                        <td>+919876543210</td>
-                        @else
                         <td>{{ $provider->mobile }}</td>
-                        @endif
-                        <!-- <td>{{ $provider->total_requests }}</td>
-                        <td>{{ $provider->accepted_requests }}</td>
-                        <td>{{ $provider->total_requests - $provider->accepted_requests }}</td> -->
                         <td>
                             @if($provider->pending_documents() > 0 || $provider->service == null)
                                 <a class="btn btn-danger btn-block label-right shadow-box" href="{{route('crm.provider.document.index', $provider->id )}}">Beachtung! <span class="btn-label">{{ $provider->pending_documents() }}</span></a>
@@ -109,14 +92,6 @@
                                     <li>
                                         <a href="{{ route('crm.provider.statement', $provider->id) }}" class="btn btn-default"><i class="fa fa-file"></i> Geschichte</a>
                                     </li>
-                                    <!--change by 101-->
-                                    <!-- <li>
-                                        <a href="#" class="btn btn-default"><i class="fa fa-viadeo-square"></i> Suspend</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="btn btn-default"><i class="fa fa-viadeo"></i> Hold</a>
-                                    </li> -->
-                                    <!-- end -->
                                     <li>
                                         <a href="{{ route('crm.provider.edit', $provider->id) }}" class="btn btn-default"><i class="fa fa-pencil"></i> Profil bearbeiten</a>
                                     </li>
@@ -139,9 +114,6 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Mobiltelefon</th>
-                        <!-- <th>Total Ride</th>
-                        <th>Accepted Ride</th>
-                        <th>Cancelled Ride</th> -->
                         <th>Unterlagen</th>
                         <th>Online</th>
                         <th>Aktion</th>

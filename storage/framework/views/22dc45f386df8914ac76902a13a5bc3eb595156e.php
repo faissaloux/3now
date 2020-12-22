@@ -59,12 +59,6 @@
                                     <li><a href="/page/datenschutz" class="hboynas2">Datenschutz-Bestimmungen</a></li>
                                     <li><a href="/page/agb">AGB</a></li>
                                     <li><a href="/page/terms-and-conditions">Fragen und Antworten</a></li>
-
-							<!--<?php $__currentLoopData = getPages(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $list): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                            <?php if($list->slug == 'about-us' || $list->slug == 'refund-policy' || $list->slug == 'why-us' || $list->slug == 'privacy-policy' || $list->slug == 'terms-conditions'): ?>
-								<li><a href="<?php echo e(url('').'/'.$list->slug); ?>"><?php echo e(ucfirst($list->title)); ?></a></li>
-                                <?php endif; ?>
-							<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>-->
                         </ul>
                     </div>
                 </div>

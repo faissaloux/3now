@@ -60,9 +60,7 @@ class ServiceResource extends Controller
      */
     public function store(Request $request)
     {
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error','Disabled for demo purposes! Please contact us at info@appoets.com');
-        }
+         
 
 		// var_dump( $request->all() );
 		
@@ -210,9 +208,7 @@ class ServiceResource extends Controller
      */
     public function destroy($id)
     {
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error','Disabled for demo purposes! Please contact us at info@appoets.com');
-        }
+         
         
         try {
             ServiceType::find($id)->delete();

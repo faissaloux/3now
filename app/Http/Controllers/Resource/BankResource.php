@@ -131,9 +131,7 @@ class BankResource extends Controller
      */
     public function store(Request $request)
     {
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error','Disabled for demo purposes! Please contact us at info@appoets.com');
-        }
+         
 
         $this->validate($request, [
             'title' => 'required',
@@ -198,9 +196,7 @@ class BankResource extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error','Disabled for demo purposes! Please contact us at info@appoets.com');
-        }
+         
         
         /*$this->validate($request, [
             'account_name' => 'required|max:255',
@@ -237,9 +233,7 @@ class BankResource extends Controller
      */
     public function destroy($id)
     {
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error','Disabled for demo purposes! Please contact us at info@appoets.com');
-        }
+         
         
         try {
             BankAccount::find($id)->delete();

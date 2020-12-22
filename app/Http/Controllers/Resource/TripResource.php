@@ -216,9 +216,7 @@ class TripResource extends Controller
      */
     public function destroy($id)
     {
-        if(Setting::get('demo_mode', 0) == 1) {
-            return back()->with('flash_error', 'Disabled for demo purposes! Please contact us at info@appoets.com');
-        }
+        
         
         try {
             $Request = UserRequests::findOrFail($id);
